@@ -1,0 +1,12 @@
+/* Balance container */
+.balance-card{
+    width: 1010px;
+    height: 200px;
+    background-color: aqua;
+    padding: 20px;
+    box-shadow: rgba(31, 30, 30, 1) 6px 6px;
+}
+.balance-title{
+    border-bottom: 2px solid black;
+    text-align: center;
+}
