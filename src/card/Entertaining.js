@@ -71,6 +71,9 @@ export default function Entertaining(){
                     <h1 className="e-total-time-title">Total Time</h1>
                 </div>
             </div>
+            <div>
+              <h1>testovic</h1>
+            </div>
             <div className="e-timer-content">
                 <div className="e-timer-container">    
                     <span className="e-timer-width"><h1 className="e-timer"> {edays < 10 ? "0" + edays : edays} </h1><span>d</span></span>
