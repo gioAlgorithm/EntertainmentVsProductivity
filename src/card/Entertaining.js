@@ -4,6 +4,22 @@ import { TbPlayerPause } from "react-icons/tb";
 import {BsFillPlayFill} from "react-icons/bs"
 import { useState, useEffect, useRef } from "react";
 
+function ResetConfirmation({ onConfirm, onCancel }) {
+  return (
+    <div>
+      <div className="e-reset-confirm-opacity"></div>
+      <div className="e-reset-confirm-container">
+        <p>Are you sure you want to reset the timer?</p>
+        <div className="e-reset-confirm-buttons">
+          <button className="e-reset-confirm-yes" onClick={onConfirm}>Yes</button>
+          <button className="e-reset-confirm-no" onClick={onCancel}>No</button>
+        </div>
+        
+      </div>
+    </div>
+  );
+}
+
 export default function Entertaining(){
 
     // logic of timer 
@@ -14,7 +30,13 @@ export default function Entertaining(){
 
     // timer usestate
     const [isRunning, setIsRunning] = useState(false);
+
+    // reset confirmation state
+    const [showConfirm, setShowConfirm] = useState(false);
+
     const timerRef = useRef();
+
+    
 
     useEffect(() => {
       if (isRunning) {
@@ -49,19 +71,34 @@ export default function Entertaining(){
       setIsRunning(prevState => !prevState);
       clearInterval(timerRef.current);
     }
-
-   
+    // reset button confirmation container logic
     const handleReset = ()=>{
+        setShowConfirm(true)
+        setIsRunning(false)
+    }
+
+    const handleConfirmReset = ()=>{
       setEMinutes(0)
       setESeconds(0)
       setEHours(0)
       setEDays(0)
       setIsRunning(false);
       clearInterval(timerRef.current);
+      setShowConfirm(false)
+    }
+
+    const handleCancelReset = () =>{
+      setShowConfirm(false)
+      setIsRunning(true)
     }
 
     return(
         <div className="entertaining-card">
+          {showConfirm && (
+                  <ResetConfirmation 
+                      onConfirm={handleConfirmReset}
+                      onCancel={handleCancelReset}
+                  />)}
             <h1 className="title-entertaining">Entertaining</h1>
             <div className="entertaining-content">
                 <div className="e-history">
@@ -71,10 +108,9 @@ export default function Entertaining(){
                     <h1 className="e-total-time-title">Total Time</h1>
                 </div>
             </div>
-            <div>
-              <h1>testovic</h1>
-            </div>
+
             <div className="e-timer-content">
+                
                 <div className="e-timer-container">    
                     <span className="e-timer-width"><h1 className="e-timer"> {edays < 10 ? "0" + edays : edays} </h1><span>d</span></span>
                     <span className="e-timer-width"><h1 className="e-timer">{ehours < 10 ? "0" + ehours: ehours}</h1><span>h</span></span>

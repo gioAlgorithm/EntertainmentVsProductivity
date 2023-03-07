@@ -4,6 +4,23 @@ import { TbPlayerPause } from "react-icons/tb";
 import {BsFillPlayFill} from "react-icons/bs"
 import { useState, useEffect, useRef } from "react";
 
+
+function ResetConfirmation({ onConfirm, onCancel }) {
+  return (
+    <div>
+      <div className="p-reset-confirm-opacity"></div>
+      <div className="p-reset-confirm-container">
+        <p>Are you sure you want to reset the timer?</p>
+        <div className="p-reset-confirm-buttons">
+          <button className="p-reset-confirm-yes" onClick={onConfirm}>Yes</button>
+          <button className="p-reset-confirm-no" onClick={onCancel}>No</button>
+        </div>
+        
+      </div>
+    </div>
+  );
+}
+
 export default function Productivity(){
 
     // logic of timer 
@@ -14,6 +31,10 @@ export default function Productivity(){
 
     // if timer is runing
     const [isRunning, setIsRunning] = useState(false);
+
+    // reset confirmation state
+    const [showConfirm, setShowConfirm] = useState(false);
+
     const timerRef = useRef();
 
     useEffect(() => {
@@ -51,16 +72,33 @@ export default function Productivity(){
     }
 
    
+    // reset button confirmation container logic
     const handleReset = ()=>{
+      setShowConfirm(true)
+      setIsRunning(false)
+    }
+
+    const handleConfirmReset = ()=>{
       setPMinutes(0)
       setPSeconds(0)
       setPHours(0)
       setPDays(0)
       setIsRunning(false);
       clearInterval(timerRef.current);
+      setShowConfirm(false)
+    }
+
+    const handleCancelReset = () =>{
+      setShowConfirm(false)
+      setIsRunning(true)
     }
     return(
         <div className="productive-card">
+          {showConfirm && (
+                  <ResetConfirmation 
+                      onConfirm={handleConfirmReset}
+                      onCancel={handleCancelReset}
+                  />)}
             <h1 className="title-productive">Productivity</h1>
             <div className="productivity-content">
                 <div className="p-history">
