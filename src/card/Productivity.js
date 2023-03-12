@@ -24,6 +24,7 @@ function ResetConfirmation({ onConfirm, onCancel }) {
 export default function Productivity(){
 
     // logic of timer 
+    const [startTime, setStartTime] = useState(null);
     const [pseconds, setPSeconds]=useState(0)
     const [pminutes, setPMinutes]=useState(0)
     const [phours, setPHours]=useState(0)
@@ -41,29 +42,30 @@ export default function Productivity(){
 
     useEffect(() => {
       if (isRunning) {
+        setStartTime(Date.now());
+      } else {
+        clearInterval(timerRef.current);
+        setStartTime(null);
+      }
+    }, [isRunning]);
+  
+    useEffect(() => {
+      if (startTime) {
         timerRef.current = setInterval(() => {
-          console.log(new Date().getTime())
-          setPSeconds(pseconds + 1);
-          if (pseconds === 59) {
-            setPMinutes(pminutes + 1);
-            setPSeconds(0);
-          }
-          if (pminutes === 59 && pseconds === 59) {
-            setPHours(phours + 1);
-            setPMinutes(0);
-            setPSeconds(0);
-          }
-          if (phours === 23 && pminutes === 59 && pseconds === 59) {
-            setPDays(pdays + 1);
-            setPHours(0);
-            setPMinutes(0);
-            setPSeconds(0);
-          }
+          const elapsedTime = Date.now() - startTime;
+          const days = Math.floor(elapsedTime / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((elapsedTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
+          
+          setPDays(days);
+          setPHours(hours);
+          setPMinutes(minutes);
+          setPSeconds(seconds);
         }, 1000);
       }
-  
       return () => clearInterval(timerRef.current);
-    }, [pseconds, pminutes, phours, pdays, isRunning]);
+    }, [startTime]);
   
      // stop, start, reset logic
 

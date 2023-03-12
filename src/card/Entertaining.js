@@ -23,6 +23,7 @@ function ResetConfirmation({ onConfirm, onCancel }) {
 export default function Entertaining(){
 
     // logic of timer 
+    const [startTime, setStartTime] = useState(null);
     const [eseconds, setESeconds]=useState(0)
     const [eminutes, setEMinutes]=useState(0)
     const [ehours, setEHours]=useState(0)
@@ -42,28 +43,30 @@ export default function Entertaining(){
 
     useEffect(() => {
       if (isRunning) {
+        setStartTime(Date.now());
+      } else {
+        clearInterval(timerRef.current);
+        setStartTime(null);
+      }
+    }, [isRunning]);
+  
+    useEffect(() => {
+      if (startTime) {
         timerRef.current = setInterval(() => {
-          setESeconds(eseconds + 1);
-          if (eseconds === 59) {
-            setEMinutes(eminutes + 1);
-            setESeconds(0);
-          }
-          if (eminutes === 59 && eseconds === 59) {
-            setEHours(ehours + 1);
-            setEMinutes(0);
-            setESeconds(0);
-          }
-          if (ehours === 23 && eminutes === 59 && eseconds === 59) {
-            setEDays(edays + 1);
-            setEHours(0);
-            setEMinutes(0);
-            setESeconds(0);
-          }
+          const elapsedTime = Date.now() - startTime;
+          const days = Math.floor(elapsedTime / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((elapsedTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
+          
+          setEDays(days);
+          setEHours(hours);
+          setEMinutes(minutes);
+          setESeconds(seconds);
         }, 1000);
       }
-  
       return () => clearInterval(timerRef.current);
-    }, [eseconds, eminutes, ehours, edays, isRunning]);
+    }, [startTime]);
   
      // stop, start, reset logic
 
