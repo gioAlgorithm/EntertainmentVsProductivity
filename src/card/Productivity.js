@@ -34,12 +34,15 @@ export default function Productivity(){
 
     // reset confirmation state
     const [showConfirm, setShowConfirm] = useState(false);
+    // history state
+    const [history, setHistory] = useState([]);
 
     const timerRef = useRef();
 
     useEffect(() => {
       if (isRunning) {
         timerRef.current = setInterval(() => {
+          console.log(new Date().getTime())
           setPSeconds(pseconds + 1);
           if (pseconds === 59) {
             setPMinutes(pminutes + 1);
@@ -74,8 +77,10 @@ export default function Productivity(){
    
     // reset button confirmation container logic
     const handleReset = ()=>{
-      setShowConfirm(true)
-      setIsRunning(false)
+      if(isRunning || pseconds >= 1 || pminutes >= 1 || phours >= 1 || pdays>= 1){
+        setShowConfirm(true)
+        setIsRunning(false)
+      }
     }
 
     const handleConfirmReset = ()=>{
@@ -92,6 +97,32 @@ export default function Productivity(){
       setShowConfirm(false)
       setIsRunning(true)
     }
+
+    // submit button logic
+    const handleSubmit = () => {
+      if(isRunning || pseconds >= 1 || pminutes >= 1 || phours >= 1 || pdays>= 1){
+        let currentTime = ``
+        if(pdays > 0){
+          currentTime += `${pdays < 10 ? "0" + pdays : pdays}d `
+        }if(phours > 0){
+          currentTime += `${phours < 10 ? "0" + phours: phours}h `
+        }if(pminutes > 0){
+          currentTime += `${pminutes < 10 ? "0" + pminutes : pminutes}m `
+        }if(pseconds > 0){
+          currentTime += `${pseconds <10 ? "0" + pseconds : pseconds}s`
+        }
+                             
+        setHistory(prevHistory => [...prevHistory, currentTime]);
+        setPMinutes(0)
+        setPSeconds(0)
+        setPHours(0)
+        setPDays(0)
+        setIsRunning(false);
+      }
+    }
+
+
+
     return(
         <div className="productive-card">
           {showConfirm && (
@@ -103,6 +134,11 @@ export default function Productivity(){
             <div className="productivity-content">
                 <div className="p-history">
                     <h1 className="p-history-title">History</h1>
+                    <ul className="p-history-list">
+                      {history.map((time, index) => (
+                        <li key={index}>{time}</li>
+                      ))}
+                    </ul>
                 </div>
                 <div className="p-total-time">
                     <h1 className="p-total-time-title">Total Time</h1>
@@ -118,7 +154,7 @@ export default function Productivity(){
                 <div className="p-buttons">
                     <button className="p-restart" onClick={handleReset}>Reset</button>
                     <button className="p-stop" onClick={handleStartStop}>{isRunning ? (<>Stop <TbPlayerPause /></>) : (<>Start <BsFillPlayFill /> </>)}</button>
-                    <button className="p-submit">Submit</button>
+                    <button className="p-submit" onClick={handleSubmit}>Submit</button>
                 </div>
             </div>
         </div>

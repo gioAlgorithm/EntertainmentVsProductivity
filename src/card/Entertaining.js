@@ -33,6 +33,8 @@ export default function Entertaining(){
 
     // reset confirmation state
     const [showConfirm, setShowConfirm] = useState(false);
+    // history state
+    const [history, setHistory] = useState([]);
 
     const timerRef = useRef();
 
@@ -65,16 +67,18 @@ export default function Entertaining(){
   
      // stop, start, reset logic
 
-
-     
      function handleStartStop() {
       setIsRunning(prevState => !prevState);
       clearInterval(timerRef.current);
     }
+
     // reset button confirmation container logic
     const handleReset = ()=>{
+      if(isRunning || eseconds >= 1 || eminutes >= 1 || ehours >= 1 || edays>= 1){
         setShowConfirm(true)
         setIsRunning(false)
+      }
+      
     }
 
     const handleConfirmReset = ()=>{
@@ -92,6 +96,29 @@ export default function Entertaining(){
       setIsRunning(true)
     }
 
+    // submit button logic
+    const handleSubmit = () => {
+      if(isRunning || eseconds >= 1 || eminutes >= 1 || ehours >= 1 || edays>= 1){
+        let currentTime = ``
+        if(edays > 0){
+          currentTime += `${edays < 10 ? "0" + edays : edays}d `
+        }if(ehours > 0){
+          currentTime += `${ehours < 10 ? "0" + ehours: ehours}h `
+        }if(eminutes > 0){
+          currentTime += `${eminutes < 10 ? "0" + eminutes : eminutes}m `
+        }if(eseconds > 0){
+          currentTime += `${eseconds <10 ? "0" + eseconds : eseconds}s`
+        }
+                             
+        setHistory(prevHistory => [...prevHistory, currentTime]);
+        setEMinutes(0)
+        setESeconds(0)
+        setEHours(0)
+        setEDays(0)
+        setIsRunning(false);
+      }
+    }
+
     return(
         <div className="entertaining-card">
           {showConfirm && (
@@ -103,6 +130,11 @@ export default function Entertaining(){
             <div className="entertaining-content">
                 <div className="e-history">
                     <h1 className="e-history-title">History</h1>
+                    <ul className="e-history-list">
+                      {history.map((time, index) => (
+                        <li key={index}>{time}</li>
+                      ))}
+                    </ul>
                 </div>
                 <div className="e-total-time">
                     <h1 className="e-total-time-title">Total Time</h1>
@@ -120,7 +152,7 @@ export default function Entertaining(){
                 <div className="e-buttons">
                     <button className="e-restart" onClick={handleReset}>Reset</button>
                     <button className="e-stop" onClick={handleStartStop}>{isRunning ? (<>Stop <TbPlayerPause /></>) : (<>Start <BsFillPlayFill /> </>)}</button>
-                    <button className="e-submit">Submit</button>
+                    <button className="e-submit" onClick={handleSubmit}>Submit</button>
                 </div>
             </div>
         </div>
