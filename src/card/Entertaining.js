@@ -22,14 +22,14 @@ function ResetConfirmation({ onConfirm, onCancel }) {
 
 export default function Entertaining(){
 
-    // logic of timer 
+    // timer states
     const [startTime, setStartTime] = useState(null);
     const [eseconds, setESeconds]=useState(0)
     const [eminutes, setEMinutes]=useState(0)
     const [ehours, setEHours]=useState(0)
     const [edays, setEDays]=useState(0)
 
-    // timer usestate
+    // if timer is runing 
     const [isRunning, setIsRunning] = useState(false);
 
     // reset confirmation state
@@ -134,7 +134,7 @@ export default function Entertaining(){
                 <div className="e-history">
                     <h1 className="e-history-title">History</h1>
                     <ul className="e-history-list">
-                      {history.map((time, index) => (
+                      {history.slice(-7).map((time, index) => (
                         <li key={index}>{time}</li>
                       ))}
                     </ul>

@@ -23,7 +23,7 @@ function ResetConfirmation({ onConfirm, onCancel }) {
 
 export default function Productivity(){
 
-    // logic of timer 
+    // timer states
     const [startTime, setStartTime] = useState(null);
     const [pseconds, setPSeconds]=useState(0)
     const [pminutes, setPMinutes]=useState(0)
@@ -137,7 +137,7 @@ export default function Productivity(){
                 <div className="p-history">
                     <h1 className="p-history-title">History</h1>
                     <ul className="p-history-list">
-                      {history.map((time, index) => (
+                      {history.slice(-7).map((time, index) => (
                         <li key={index}>{time}</li>
                       ))}
                     </ul>

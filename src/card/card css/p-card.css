@@ -29,6 +29,11 @@
     font-size: 25px;
     border-bottom: 2px solid black;
 }
+.p-history-list li{
+    list-style: none;
+    font-size: 18px;
+    line-height: 30px;
+}
 .p-total-time{
     display: flex;
     flex-direction: column;
