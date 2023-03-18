@@ -41,7 +41,7 @@
     font-size: 18px;
     line-height: 30px;
 }
-.e-total-time{
+.e-total-time-container{
     display: flex;
     flex-direction: column;
     width: 100%;
