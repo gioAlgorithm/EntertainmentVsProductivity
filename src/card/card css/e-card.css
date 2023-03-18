@@ -31,7 +31,7 @@
 }
 .e-history-title{
     margin-top: 10px;
-    width: 70%;
+    width: 140px;
     text-align: center;
     font-size: 25px;
     border-bottom: 2px solid black;
@@ -49,11 +49,24 @@
     align-items: center;
     border-left: 1px solid black;
 }
+.e-total-time{
+    height: 125px;
+}
 .e-total-time-title{
     margin-top: 10px;
-    width: 70%;
+    width: 140px;
     text-align: center;
     font-size: 25px;
+    border-bottom: 2px solid black;
+}
+.e-total-time-hr{
+    height: 125px;
+}
+.e-total-time-title-hr{
+    margin-top: 10px;
+    width: 140px;
+    text-align: center;
+    font-size: 20px;
     border-bottom: 2px solid black;
 }
 .e-timer-content{

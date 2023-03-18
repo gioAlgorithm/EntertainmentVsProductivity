@@ -24,7 +24,7 @@
 }
 .p-history-title{
     margin-top: 10px;
-    width: 70%;
+    width: 140px;
     text-align: center;
     font-size: 25px;
     border-bottom: 2px solid black;
@@ -34,7 +34,7 @@
     font-size: 18px;
     line-height: 30px;
 }
-.p-total-time{
+.p-total-time-container{
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -42,11 +42,24 @@
     align-items: center;
     border-left: 1px solid black;
 }
+.p-total-time{
+    height: 125px;
+}
 .p-total-time-title{
     margin-top: 10px;
-    width: 70%;
+    width: 140px;
     text-align: center;
     font-size: 25px;
+    border-bottom: 2px solid black;
+}
+.p-total-time-hr{
+    height: 125px;
+}
+.p-total-time-title-hr{
+    margin-top: 10px;
+    width: 140px;
+    text-align: center;
+    font-size: 20px;
     border-bottom: 2px solid black;
 }
 .title-productive{

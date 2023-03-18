@@ -140,7 +140,12 @@ export default function Entertaining(){
                     </ul>
                 </div>
                 <div className="e-total-time-container">
+                  <div className="e-total-time">
                     <h1 className="e-total-time-title">Total Time</h1>
+                  </div>
+                  <div className="e-total-time-hr">
+                  <h1 className="e-total-time-title-hr">Total Time in hr</h1>
+                  </div>
                 </div>
             </div>
 

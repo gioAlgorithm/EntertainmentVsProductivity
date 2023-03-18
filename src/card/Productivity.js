@@ -142,8 +142,13 @@ export default function Productivity(){
                       ))}
                     </ul>
                 </div>
-                <div className="p-total-time">
+                <div className="p-total-time-container">
+                  <div className="p-total-time">
                     <h1 className="p-total-time-title">Total Time</h1>
+                  </div>
+                  <div className="p-total-time-hr">
+                    <h1 className="p-total-time-title-hr">Total Time in hr</h1>   
+                  </div>
                 </div>
             </div>
             <div className="p-timer-content">
