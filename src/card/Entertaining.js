@@ -7,6 +7,7 @@ import { useState, useEffect, useRef } from "react";
 function ResetConfirmation({ onConfirm, onCancel }) {
   return (
     <div>
+      <div>test</div>
       <div className="e-reset-confirm-opacity"></div>
       <div className="e-reset-confirm-container">
         <p>Are you sure you want to reset the timer?</p>
