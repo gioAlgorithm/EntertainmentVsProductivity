@@ -16,6 +16,7 @@ function ResetConfirmation({ onConfirm, onCancel }) {
           <button className="e-reset-confirm-no" onClick={onCancel}>No</button>
         </div>
         
+        
       </div>
     </div>
   );
