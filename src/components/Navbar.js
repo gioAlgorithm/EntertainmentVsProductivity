@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react"
 import jwt_decode from "jwt-decode"
+import { LoginSocialFacebook } from "reactjs-social-login"
+import { FacebookLoginButton } from "react-social-login-buttons"
 import logo from '../image/logo.png'
 import "./css/navbar.css"
 
@@ -36,6 +38,14 @@ export default function Navbar(){
         <div className="navbar">
             <img alt="logo" src={logo}/>
             <div id="signInDiv"></div>
+            <LoginSocialFacebook 
+                appId="895324061700196"
+                onResolve={(response) =>{
+
+                }}
+            >
+                <FacebookLoginButton />
+            </LoginSocialFacebook>
             { Object.keys(user).length !== 0 &&
                 <button onClick={(e)=> handleSignOut(e)}>sign out</button>
 
