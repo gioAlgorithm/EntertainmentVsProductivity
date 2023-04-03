@@ -41,7 +41,7 @@ export default function Navbar(){
             <LoginSocialFacebook 
                 appId="895324061700196"
                 onResolve={(response) =>{
-
+                    setUser(response.data)
                 }}
             >
                 <FacebookLoginButton />
