@@ -1,12 +1,48 @@
 .navbar{
     width: 100%;
     display: flex;
-    justify-content: center;
     background-color: beige;
+    height: 100px;
 }
-.navbar img{
-    display: flex;
-    justify-content: center;
+.logo{
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    object-fit: contain;
     width: 700px;
     height: 100px;
 }
+/* google and facebook button */
+.sign-in{
+    margin-top: 3px;
+    margin-left: 5%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 80%;
+    z-index: 2;
+    
+}
+.facebook-button {
+    margin-top: 2px;
+    display: flex;
+    font-family: "Google Sans",arial,sans-serif;
+    align-items: center;
+    justify-content: center;
+    width: 175px;
+    height: 31px;
+    background-color: #3b5998;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  
+  .facebook-button:hover {
+    background-color: #2d4373;
+  }
+  .facebook-button span{
+    margin-left: 2px;
+  }
