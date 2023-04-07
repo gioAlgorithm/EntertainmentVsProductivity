@@ -40,6 +40,15 @@ export default function Navbar(){
         }
     }, [user])
 
+    function handleFacebookLogin(response) {
+        const pictureUrl = response.picture.data.url;
+        const userData = {
+          name: response.name,
+          picture: pictureUrl,
+        };
+        setUser(userData);
+      }
+
     return(
         
         <div className="navbar">
@@ -49,11 +58,7 @@ export default function Navbar(){
                     <div id="signInDiv"></div>
                     <LoginSocialFacebook 
                         appId="895324061700196"
-                        
-                        onResolve={(response) =>{
-                            console.log(response)// Add this line to log the facebook data
-                            setUser(response.data)
-                        }}
+                        onResolve={(response) => handleFacebookLogin(response.data)}
                     >
                         <button className="facebook-button">
                             
