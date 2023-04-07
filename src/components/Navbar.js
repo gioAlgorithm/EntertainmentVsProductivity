@@ -12,7 +12,7 @@ export default function Navbar(){
     function handleCallbackResponse(response){
         var userObject = jwt_decode(response.credential)
         setUser(userObject)
-        
+        console.log(userObject) // Add this line to log the Google data
     }
 
     function handleSignOut(event){
@@ -22,24 +22,26 @@ export default function Navbar(){
 
     useEffect(()=>{
         /* global google */
-        google.accounts.id.initialize({
-            client_id: "299919906576-pfdoek5hbnqcrhdaho8n02s4olt6uovm.apps.googleusercontent.com",
-            callback: handleCallbackResponse
-        })
-
-        if (Object.keys(user).length === 0) {
-            google.accounts.id.renderButton(
-              document.getElementById("signInDiv"),
-              {
-                theme: "outline",
-                size: "medium",
-              }
-            )
-          }
+        if(typeof google !== 'undefined' && typeof google.accounts !== 'undefined' && typeof google.accounts.id !== 'undefined'){
+            google.accounts.id.initialize({
+                client_id: "299919906576-pfdoek5hbnqcrhdaho8n02s4olt6uovm.apps.googleusercontent.com",
+                callback: handleCallbackResponse
+            })
+    
+            if (Object.keys(user).length === 0) {
+                google.accounts.id.renderButton(
+                  document.getElementById("signInDiv"),
+                  {
+                    theme: "outline",
+                    size: "medium",
+                  }
+                )
+            }
+        }
     }, [user])
 
-
     return(
+        
         <div className="navbar">
             <img alt="logo" src={logo} className="logo"/>
             {Object.keys(user).length === 0 &&
@@ -49,10 +51,12 @@ export default function Navbar(){
                         appId="895324061700196"
                         
                         onResolve={(response) =>{
+                            console.log(response)// Add this line to log the facebook data
                             setUser(response.data)
                         }}
                     >
                         <button className="facebook-button">
+                            
                             <FaFacebookF /><span>Sign in with Facebook</span> 
                         </button>
                     </LoginSocialFacebook>
