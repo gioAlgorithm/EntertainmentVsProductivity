@@ -13,36 +13,42 @@
     width: 700px;
     height: 100px;
 }
-/* google and facebook button */
+/* google and facebook sign in */
 .sign-in{
-    margin-top: 3px;
-    margin-left: 5%;
     display: flex;
     flex-direction: column;
-    margin-left: 80%;
-    z-index: 2;
-    
-}
-.facebook-button {
-    margin-top: 2px;
-    display: flex;
-    font-family: "Google Sans",arial,sans-serif;
-    align-items: center;
     justify-content: center;
-    width: 175px;
-    height: 31px;
-    background-color: #3b5998;
-    color: white;
+}
+
+.sign-in button{
+    display: flex;
+    align-self: middle;
+    width: 200px;
+    height: 30px;
+    border-radius: 8px;
     border: none;
-    border-radius: 5px;
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 15px;
+    text-align: center;
+    align-items: center;
+    font-family:sans-serif;
+    font-weight: bold;
+    background-color: beige;
     cursor: pointer;
-  }
-  
-  .facebook-button:hover {
-    background-color: #2d4373;
-  }
-  .facebook-button span{
-    margin-left: 2px;
-  }
+    padding-left: 10px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+.sign-in button:hover{
+    background-color: rgb(219, 219, 187);
+}
+.sign-in button span{
+    margin-left: 5px;
+}
+.google-button{
+    padding-right: 15px;
+}
+.facebook-button{
+    margin-top: 5px;
+}
+.facebook-button svg{
+    color: #3b5998;
+}

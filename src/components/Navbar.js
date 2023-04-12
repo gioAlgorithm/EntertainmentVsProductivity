@@ -1,82 +1,63 @@
-import React, { useEffect, useState } from "react"
-import jwt_decode from "jwt-decode"
-import { LoginSocialFacebook } from "reactjs-social-login"
-import { FaFacebookF } from "react-icons/fa";
-import logo from '../image/logo.png'
+import React from "react"
+import {useAuthState} from "react-firebase-hooks/auth"
+import { FcGoogle} from "react-icons/fc"
+import { RiFacebookFill } from "react-icons/ri";
+import { GoogleAuthProvider, signInWithPopup, FacebookAuthProvider,updateProfile } from "firebase/auth";
+import {auth} from "../utils/firebase"
+import logo from "../image/logo.png"
 import "./css/navbar.css"
 
 export default function Navbar(){
 
-    const [user, setUser] = useState({})
+    const [user] = useAuthState(auth)
 
-    function handleCallbackResponse(response){
-        var userObject = jwt_decode(response.credential)
-        setUser(userObject)
-        console.log(userObject) // Add this line to log the Google data
-    }
-
-    function handleSignOut(event){
-        setUser({})
-       
-    }
-
-    useEffect(()=>{
-        /* global google */
-        if(typeof google !== 'undefined' && typeof google.accounts !== 'undefined' && typeof google.accounts.id !== 'undefined'){
-            google.accounts.id.initialize({
-                client_id: "299919906576-pfdoek5hbnqcrhdaho8n02s4olt6uovm.apps.googleusercontent.com",
-                callback: handleCallbackResponse
-            })
-    
-            if (Object.keys(user).length === 0) {
-                google.accounts.id.renderButton(
-                  document.getElementById("signInDiv"),
-                  {
-                    theme: "outline",
-                    size: "medium",
-                  }
-                )
-            }
+    // sign in with google
+    const googleProvider = new GoogleAuthProvider()
+    const GoogleLogin = async () =>{
+        try {
+            const result = await signInWithPopup(auth,googleProvider)
+            console.log(result.user)
+        } catch(error){
+            console.log(error)
         }
-    }, [user])
+    }
 
-    function handleFacebookLogin(response) {
-        const pictureUrl = response.picture.data.url;
-        const userData = {
-          name: response.name,
-          picture: pictureUrl,
-        };
-        setUser(userData);
-      }
+    // sign in with facebook
+    const fbProvider = new FacebookAuthProvider();
+    const FacebookLogin = async ()=>{
+        try{
+            const result = await signInWithPopup(auth,fbProvider)
+            const credantial = await FacebookAuthProvider.credentialFromResult(result)
+            const token = credantial.accessToken
+            let photoURL = result.user.photoURL + '?height=500&access_token=' + token
+            await updateProfile(auth.currentUser, {photoURL:photoURL})
+            console.log(result)
+        } catch(error){
+            console.log(error)
+        }
+    }
+
 
     return(
         
         <div className="navbar">
             <img alt="logo" src={logo} className="logo"/>
-            {Object.keys(user).length === 0 &&
+            {user === null &&
                 <div className="sign-in">
-                    <div id="signInDiv"></div>
-                    <LoginSocialFacebook 
-                        appId="895324061700196"
-                        onResolve={(response) => handleFacebookLogin(response.data)}
-                    >
-                        <button className="facebook-button">
-                            
-                            <FaFacebookF /><span>Sign in with Facebook</span> 
-                        </button>
-                    </LoginSocialFacebook>
+                    <button onClick={GoogleLogin} className="google-button" ><FcGoogle /><span> Sign in with Google</span></button>
+                    <button onClick={FacebookLogin} className="facebook-button"><RiFacebookFill /><span> Sign in with Facebook</span></button>
                 </div>
             }
-            { Object.keys(user).length !== 0 &&
-                <button onClick={(e)=> handleSignOut(e)}>sign out</button>
+            {user &&
 
-            }
-            { Object.keys(user).length >= 1 &&
                 <div>
-                    <img alt="user" src={user.picture} />
-                    <h3>{user.name}</h3>
+                    <img alt="profile" src={user.photoURL} />
+                    <h1>{user.displayName}</h1>
+                    <button onClick={()=> auth.signOut()}>Sign Out</button>
                 </div>
+                
             }
+            
         </div>
     )
 }
