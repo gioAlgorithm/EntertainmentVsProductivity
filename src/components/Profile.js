@@ -2,6 +2,7 @@ import React from "react";
 import { useRef, useEffect,useState } from "react";
 import { auth } from "../utils/firebase";
 import { FaAngleUp } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import "./css/profile.css"
 
 export default function Profile({ user }) {
@@ -44,7 +45,7 @@ export default function Profile({ user }) {
                 <div className="profile-dropdown">
                     <h5>Signed in as</h5>
                     <h1 className="profile-name">{user.displayName.split(" ")[0]}</h1>
-                    <button>Profile</button>
+                    <Link to="/profile">Profile</Link>
                     <button onClick={signOut}>Sign Out</button>
                 </div>
             }

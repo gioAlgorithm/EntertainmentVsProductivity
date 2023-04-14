@@ -44,7 +44,7 @@
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.075);
     font-size: 16px;
     padding: 5px;
-    margin-top: 170px;
+    margin-top: 180px;
     margin-left: -100px;
     z-index: 4;
    
@@ -53,14 +53,30 @@
     font-size: 15px;
     font-weight: 300;
 }
-.profile-dropdown button{
+.profile-dropdown a{
     margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     background-color: beige;
     width: 150px;
     height: 30px;
     font-size: 20px;
     border: none;
+    text-decoration: none;
+    color: black;
+}
+.profile-dropdown button{
+    text-align: center;
+    background-color: beige;
+    width: 150px;
+    height: 30px;
+    font-size: 20px;
+    border: none;
+}
+.profile-dropdown a:hover{
+    background-color: rgb(231, 231, 182);
 }
 .profile-dropdown button:hover{
     background-color: rgb(231, 231, 182);
