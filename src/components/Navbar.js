@@ -1,63 +1,58 @@
-import React from "react"
+import React, {useState, useRef, useEffect} from "react"
 import {useAuthState} from "react-firebase-hooks/auth"
-import { FcGoogle} from "react-icons/fc"
-import { RiFacebookFill } from "react-icons/ri";
-import { GoogleAuthProvider, signInWithPopup, FacebookAuthProvider,updateProfile } from "firebase/auth";
+import { FaAngleUp } from "react-icons/fa";
 import {auth} from "../utils/firebase"
 import logo from "../image/logo.png"
 import "./css/navbar.css"
+import SignIn from "./SignIn";
+import Profile from "./Profile";
 
 export default function Navbar(){
 
     const [user] = useAuthState(auth)
 
-    // sign in with google
-    const googleProvider = new GoogleAuthProvider()
-    const GoogleLogin = async () =>{
-        try {
-            const result = await signInWithPopup(auth,googleProvider)
-            console.log(result.user)
-        } catch(error){
-            console.log(error)
-        }
+    //dropdown of select
+    const [dropdown, setDropdown] = useState(false)
+
+    const toggleDropdown = () =>{
+        setDropdown((state) => !state)
     }
 
-    // sign in with facebook
-    const fbProvider = new FacebookAuthProvider();
-    const FacebookLogin = async ()=>{
-        try{
-            const result = await signInWithPopup(auth,fbProvider)
-            const credantial = await FacebookAuthProvider.credentialFromResult(result)
-            const token = credantial.accessToken
-            let photoURL = result.user.photoURL + '?height=500&access_token=' + token
-            await updateProfile(auth.currentUser, {photoURL:photoURL})
-            console.log(result)
-        } catch(error){
-            console.log(error)
-        }
-    }
+    // detecting outside click
+    let menuRef = useRef()
 
+    useEffect(()=>{
+        let handler = (event) =>{
+            if(!menuRef.current.contains(event.target)){
+                setDropdown(false)
+            }
+        }
+
+
+        document.addEventListener("mousedown", handler)
+
+        return ()=>{
+            document.removeEventListener("mousedown", handler)
+        }
+    })
 
     return(
         
         <div className="navbar">
             <img alt="logo" src={logo} className="logo"/>
             {user === null &&
-                <div className="sign-in">
-                    <button onClick={GoogleLogin} className="google-button" ><FcGoogle /><span> Sign in with Google</span></button>
-                    <button onClick={FacebookLogin} className="facebook-button"><RiFacebookFill /><span> Sign in with Facebook</span></button>
+                <div ref={menuRef} className={`select ${dropdown ? "select-active" : ""}`}>
+                    <button onClick={toggleDropdown} className="select-button">Sign in {<FaAngleUp className="select-icon" />}</button>
+                    {dropdown &&
+                        (<div className="select-dropdown">
+                            <SignIn />
+                        </div>)
+                    } 
                 </div>
             }
             {user &&
-
-                <div>
-                    <img alt="profile" src={user.photoURL} />
-                    <h1>{user.displayName}</h1>
-                    <button onClick={()=> auth.signOut()}>Sign Out</button>
-                </div>
-                
+                <Profile user={user} />
             }
-            
         </div>
     )
 }

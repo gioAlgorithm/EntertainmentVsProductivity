@@ -12,43 +12,50 @@
     object-fit: contain;
     width: 700px;
     height: 100px;
+}/* navigation select styles */
+button{
+    cursor: pointer;
 }
-/* google and facebook sign in */
-.sign-in{
+.select{
+    position: relative;
+    display: block;
+    margin-top: 20px;
+    font-size: 22px;
+    margin-left: 81%;
+    
+}
+.select-button{
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: none;
+    font-size: 22px;
+    font-family: 'Pangolin', cursive;
+}
+.select-icon {
+    transition: transform 175ms;
+    vertical-align: middle;
+    font-size: 16px;
+}
+.select-dropdown{
+    position: absolute;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-}
-
-.sign-in button{
-    display: flex;
-    align-self: middle;
-    width: 200px;
-    height: 30px;
-    border-radius: 8px;
-    border: none;
-    font-size: 15px;
-    text-align: center;
-    align-items: center;
-    font-family:sans-serif;
-    font-weight: bold;
+    padding: 25px;
+    border-radius: 6px;
     background-color: beige;
-    cursor: pointer;
-    padding-left: 10px;
-    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.075);
+    text-align: center;
+    font-size: 16px;
+    margin-top: 10px;
+    margin-left: -150px;
+   
 }
-.sign-in button:hover{
-    background-color: rgb(219, 219, 187);
+  
+.select-active .select-dropdown {
+    transform: scaleY(1);
 }
-.sign-in button span{
-    margin-left: 5px;
-}
-.google-button{
-    padding-right: 15px;
-}
-.facebook-button{
-    margin-top: 5px;
-}
-.facebook-button svg{
-    color: #3b5998;
+  
+.select-active .select-icon {
+    transform: rotate(180deg);
 }

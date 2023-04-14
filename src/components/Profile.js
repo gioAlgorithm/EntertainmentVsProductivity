@@ -1,0 +1,54 @@
+import React from "react";
+import { useRef, useEffect,useState } from "react";
+import { auth } from "../utils/firebase";
+import { FaAngleUp } from "react-icons/fa";
+import "./css/profile.css"
+
+export default function Profile({ user }) {
+    
+    //dropdown of select
+    const [dropdown, setDropdown] = useState(false)
+
+    const toggleDropdown = () =>{
+        setDropdown((state) => !state)
+    }
+
+    // detecting outside click
+    let menuRef = useRef()
+
+    useEffect(()=>{
+        let handler = (event) =>{
+            if(!menuRef.current.contains(event.target)){
+                setDropdown(false)
+            }
+        }
+
+
+        document.addEventListener("mousedown", handler)
+
+        return ()=>{
+            document.removeEventListener("mousedown", handler)
+        }
+    })
+
+  const signOut = () => {
+    auth.signOut();
+  }
+
+  return (
+    <div className="profile">
+        <div onClick={toggleDropdown} ref={menuRef} className={`inner-profile ${dropdown ? "inner-profile-active" : ""}`}>
+            <img className="profile-image" alt="profile" src={user.photoURL} />
+            <FaAngleUp className="profile-select-icon" />
+            {dropdown &&
+                <div className="profile-dropdown">
+                    <h5>Signed in as</h5>
+                    <h1 className="profile-name">{user.displayName.split(" ")[0]}</h1>
+                    <button>Profile</button>
+                    <button onClick={signOut}>Sign Out</button>
+                </div>
+            }
+        </div>
+    </div>
+  );
+}

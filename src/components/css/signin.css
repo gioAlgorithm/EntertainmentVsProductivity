@@ -1,0 +1,43 @@
+/* google and facebook sign in */
+.sign-in{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.sign-in h1{
+    font-family: 'Pangolin', cursive;
+    margin-bottom: 20px;
+    font-size: 30px;
+}
+.sign-in button{
+    display: flex;
+    align-self: middle;
+    width: 200px;
+    height: 30px;
+    border-radius: 8px;
+    border: none;
+    font-size: 15px;
+    text-align: center;
+    align-items: center;
+    font-family:sans-serif;
+    font-weight: bold;
+    background-color: beige;
+    cursor: pointer;
+    padding-left: 10px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+.sign-in button:hover{
+    background-color: rgb(219, 219, 187);
+}
+.sign-in button span{
+    margin-left: 5px;
+}
+.google-button{
+    padding-right: 15px;
+}
+.facebook-button{
+    margin-top: 5px;
+}
+.facebook-button svg{
+    color: #3b5998;
+}
