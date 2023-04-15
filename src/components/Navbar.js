@@ -6,6 +6,7 @@ import logo from "../image/logo.png"
 import "./css/navbar.css"
 import SignIn from "./SignIn";
 import Profile from "./Profile";
+import { Link } from "react-router-dom";
 
 export default function Navbar(){
 
@@ -39,7 +40,7 @@ export default function Navbar(){
     return(
         
         <div className="navbar">
-            <img alt="logo" src={logo} className="logo"/>
+            <Link to="/"><img alt="logo" src={logo} className="logo"/></Link>
             {user === null &&
                 <div ref={menuRef} className={`select ${dropdown ? "select-active" : ""}`}>
                     <button onClick={toggleDropdown} className="select-button">Sign in {<FaAngleUp className="select-icon" />}</button>
