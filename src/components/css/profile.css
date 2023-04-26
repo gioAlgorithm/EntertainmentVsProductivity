@@ -20,6 +20,9 @@
     height: 40px;
     border-radius: 50%;
 }
+.profile-img-logo{
+    font-size: 33px;
+}
 .profile-name{
     margin-left: 5px;
     font-family: 'Pangolin', cursive;

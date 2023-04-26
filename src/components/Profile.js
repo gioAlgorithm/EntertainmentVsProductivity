@@ -2,11 +2,12 @@ import React from "react";
 import { useRef, useEffect,useState } from "react";
 import { auth } from "../utils/firebase";
 import { FaAngleUp } from "react-icons/fa";
+import { CgProfile } from "react-icons/cg";
 import { Link } from "react-router-dom";
 import "./css/profile.css"
 
 export default function Profile({ user }) {
-    
+    console.log(user.photoURL)
     //dropdown of select
     const [dropdown, setDropdown] = useState(false)
 
@@ -23,7 +24,7 @@ export default function Profile({ user }) {
                 setDropdown(false)
             }
         }
-
+        
 
         document.addEventListener("mousedown", handler)
 
@@ -39,7 +40,7 @@ export default function Profile({ user }) {
   return (
     <div className="profile">
         <div onClick={toggleDropdown} ref={menuRef} className={`inner-profile ${dropdown ? "inner-profile-active" : ""}`}>
-            <img className="profile-image" alt="profile" src={user.photoURL} />
+            <img className="profile-image" alt="profile" src={user.photoURL ? user.photoURL : <span className="profile-img-logo"><CgProfile /></span>} />
             <FaAngleUp className="profile-select-icon" />
             {dropdown &&
                 <div className="profile-dropdown">
