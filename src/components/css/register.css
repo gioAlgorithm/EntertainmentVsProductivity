@@ -1,0 +1,71 @@
+.register-container{
+    position: absolute;
+    z-index: 10;
+    background-color: beige;
+    width: 100%;
+    height: 100%;
+    margin-left: -25px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.register-title{
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+.register-nickname{
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    background-color: beige;
+    font-family:sans-serif;
+    margin-bottom: 5px;
+}
+.register-email{
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    background-color: beige;
+    font-family:sans-serif;
+    margin-bottom: 5px;
+}
+.register-password{
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    background-color: beige;
+    font-family:sans-serif;
+    margin-bottom: 5px;
+}
+.register-container .sign-up-button{
+    padding: 0;
+    width: 120px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+.register-or{
+    margin-top: 15px;
+    width: 100%;
+    border-bottom: 0.5px solid rgb(204, 200, 200);
+    width: 201.97px;
+}
+.register-or p{
+    margin-top: -8px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 90px;
+    position: absolute;
+    background-color: beige;
+    font-family:sans-serif;  
+}
+.register-container .register-close{
+    padding: 0;
+    margin-top: 30px;
+    width: 120px;
+    display: inline-block;
+    margin-bottom: 10px;
+}

@@ -41,3 +41,58 @@
 .facebook-button svg{
     color: #3b5998;
 }
+/* sign in with email css */
+.sign-in-email-container{
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 0.5px solid rgb(204, 200, 200);
+}
+.sign-in-email{
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    background-color: beige;
+    font-family:sans-serif;
+    margin-bottom: 5px;
+}
+.sign-in-password{
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    background-color: beige;
+    font-family:sans-serif;
+    margin-bottom: 5px;
+}
+.sign-in-email-container .sign-in-email-btn{
+    padding: 0;
+    width: 120px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+.or{
+    margin-top: 15px;
+    width: 100%;
+    border-bottom: 0.5px solid rgb(204, 200, 200);
+}
+.or p{
+    margin-top: -8px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 90px;
+    position: absolute;
+    background-color: beige;
+    font-family:sans-serif;   
+}
+.sign-in .register-btn{
+    margin: 0 auto;
+    padding: 0;
+    margin-top: 20px;
+    width: 120px;
+    display: inline-block;
+    text-align: center;
+    
+}
