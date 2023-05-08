@@ -69,3 +69,7 @@
     display: inline-block;
     margin-bottom: 10px;
 }
+.alert-message{
+    color: red;
+    font-family:sans-serif; 
+}

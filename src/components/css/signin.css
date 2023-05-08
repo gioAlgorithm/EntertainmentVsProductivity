@@ -96,3 +96,7 @@
     text-align: center;
     
 }
+.alert-message{
+    color: red;
+    font-family:sans-serif; 
+}

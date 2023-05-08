@@ -4,6 +4,7 @@ import { RiFacebookFill } from "react-icons/ri";
 import { useState } from "react";
 import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, updateProfile } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { signInWithEmailAndPassword} from "firebase/auth";
 import "./css/signin.css"
 import Register from "./Register";
 
@@ -16,14 +17,22 @@ const SignInWithEmail = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  // massege for errors
+  const [error, setError] = useState("");
   const handleSignIn = async (e) => {
     e.preventDefault();
     try {
-      const { user } = await auth.signInWithEmailAndPassword(email, password);
+      const { user } = await signInWithEmailAndPassword(auth, email, password);
       console.log(user);
     } catch (error) {
-      console.log(error);
+      const errorCode = error.code;
+      if (errorCode === 'auth/wrong-password') {
+        setError('Incorrect password');
+      } else if (errorCode === 'auth/user-not-found') {
+        setError('User does not exist');
+      } else {
+        console.log(error);
+      }
     }
   };
 
@@ -34,6 +43,9 @@ const SignInWithEmail = () => {
         <input className="sign-in-password"  placeholder="Password" type="password" id="password" required value={password} onChange={(e) => setPassword(e.target.value)}/>
         <button className="sign-in-email-btn" type="submit">Sign In</button>
       </form>
+      {alert &&
+        <p className="alert-message">{error}</p>
+      }
     </div>
   );
 };

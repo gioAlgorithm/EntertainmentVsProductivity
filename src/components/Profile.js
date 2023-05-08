@@ -40,7 +40,7 @@ export default function Profile({ user }) {
   return (
     <div className="profile">
         <div onClick={toggleDropdown} ref={menuRef} className={`inner-profile ${dropdown ? "inner-profile-active" : ""}`}>
-            <img className="profile-image" alt="profile" src={user.photoURL ? user.photoURL : <span className="profile-img-logo"><CgProfile /></span>} />
+            { user.photoURL != null ? <img className="profile-image" alt="profile" src={user.photoURL} /> : <span className="profile-img-logo"><CgProfile /></span>}
             <FaAngleUp className="profile-select-icon" />
             {dropdown &&
                 <div className="profile-dropdown">
