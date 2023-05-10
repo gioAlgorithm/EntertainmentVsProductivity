@@ -2,6 +2,7 @@ import React from "react";
 import { FcGoogle } from "react-icons/fc";
 import { RiFacebookFill } from "react-icons/ri";
 import { useState } from "react";
+import Password from "./Password";
 import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, updateProfile } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { signInWithEmailAndPassword} from "firebase/auth";
@@ -40,7 +41,7 @@ const SignInWithEmail = () => {
     <div className="sign-in-email-container">
       <form onSubmit={handleSignIn}>
         <input className="sign-in-email" placeholder="Email" type="email" id="email" value={email} required onChange={(e) => setEmail(e.target.value)}/>
-        <input className="sign-in-password"  placeholder="Password" type="password" id="password" required value={password} onChange={(e) => setPassword(e.target.value)}/>
+        <Password setPassword = {setPassword} password ={password} />
         <button className="sign-in-email-btn" type="submit">Sign In</button>
       </form>
       {alert &&

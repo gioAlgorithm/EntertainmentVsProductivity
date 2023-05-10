@@ -2,6 +2,7 @@ import React, {useState} from "react"
 import { auth } from "../utils/firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import "./css/register.css"
+import Password from "./Password";
 
 export default function Register({handleSignUpClose}) {
     const [email, setEmail] = useState("");
@@ -29,7 +30,7 @@ export default function Register({handleSignUpClose}) {
             <form onSubmit={handleSignUp}>
                 <input className="register-nickname" required placeholder="Nickname" type="text" id="displayName" value={displayName} onChange={(e) => setDisplayName(e.target.value)} />
                 <input className="register-email" required placeholder="Email" type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                <input className="register-password" required placeholder="Password" type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <Password setPassword = {setPassword} password ={password} />
                 
                 <button className="sign-up-button" type="submit">Sign Up</button>
             </form>
