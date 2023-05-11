@@ -24,6 +24,9 @@
     font-size: 33px;
     font-weight: lighter;
 }
+.profile-img-logo svg{
+    margin-top: 8px;
+}
 .profile-name{
     margin-left: 5px;
     font-family: 'Pangolin', cursive;
