@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import "./css/profile.css"
 
 export default function Profile({ user }) {
-    console.log(user)
     //dropdown of select
     const [dropdown, setDropdown] = useState(false)
 
