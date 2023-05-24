@@ -4,7 +4,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import { collection, addDoc, getDocs, query, orderBy, limit } from "firebase/firestore";
 import { TbPlayerPause } from "react-icons/tb";
 import {BsFillPlayFill} from "react-icons/bs"
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { TimerContext } from "../context/TimerContext";
 
 
 
@@ -26,17 +27,6 @@ function ResetConfirmation({ onConfirm, onCancel }) {
 
 export default function Productivity(){
 
-    // timer states
-    const [startTime, setStartTime] = useState(null);
-    const [pseconds, setPSeconds]=useState(0)
-    const [pminutes, setPMinutes]=useState(0)
-    const [phours, setPHours]=useState(0)
-    const [pdays, setPDays]=useState(0)
-
-    // if timer is runing
-    const [isStarted, setIsStarted] = useState(false);
-    const [stoppedAt, setStoppedAt] = useState(null);
-
     // reset confirmation state
     const [showConfirm, setShowConfirm] = useState(false);
     // history state
@@ -44,53 +34,15 @@ export default function Productivity(){
     // submit state
     const [isSubmitting, setIsSubmitting] = useState(false); 
 
+    const {isStarted, setIsStarted, stoppedAt, setStoppedAt, 
+      seconds, setSeconds, minutes, setMinutes, hours, setHours, 
+      days, setDays, setStartTime, timerRef} = useContext(TimerContext)
+   
 
-    const timerRef = useRef();
-
-    useEffect(() => {
-      if (isStarted) {
-        setStartTime(Date.now());
-      } else {
-        clearInterval(timerRef.current);
-        setStartTime(null);
-      }
-    }, [isStarted]);
-  
-    useEffect(() => {
-      if (startTime && isStarted) {
-        if (stoppedAt) {
-          clearInterval(timerRef.current);
-        } else {
-          if (startTime) {
-            const handleTimerInterval = () => {
-              const elapsedTime = Date.now() - startTime;
-              const days = Math.floor(elapsedTime / (1000 * 60 * 60 * 24));
-              const hours = Math.floor(
-                (elapsedTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-              );
-              const minutes = Math.floor(
-                (elapsedTime % (1000 * 60 * 60)) / (1000 * 60)
-              );
-              const seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
-  
-              setPDays(days);
-              setPHours(hours);
-              setPMinutes(minutes);
-              setPSeconds(seconds);
-            };
-  
-            handleTimerInterval();
-            timerRef.current = setInterval(handleTimerInterval, 1000);
-          }
-        }
-      }
-      return () => clearInterval(timerRef.current);
-    }, [isStarted, stoppedAt, startTime]);
-  
     // stop, start, reset logic
   
     function handleStart() {
-      setIsStarted(true);
+      setIsStarted(true)
     }
 
     function handleToggleStop() {
@@ -110,16 +62,16 @@ export default function Productivity(){
    
     // reset button confirmation container logic
     const handleReset = ()=>{
-      if(isStarted || pseconds >= 1 || pminutes >= 1 || phours >= 1 || pdays>= 1){
+      if(isStarted || seconds >= 1 || minutes >= 1 || hours >= 1 || days>= 1){
         setShowConfirm(true)
       }
     }
 
     const handleConfirmReset = ()=>{
-      setPMinutes(0)
-      setPSeconds(0)
-      setPHours(0)
-      setPDays(0)
+      setMinutes(0)
+      setSeconds(0)
+      setHours(0)
+      setDays(0)
       setIsStarted(false);
       setStoppedAt(null);
       clearInterval(timerRef.current);
@@ -133,24 +85,24 @@ export default function Productivity(){
     // submit button logic
 
     const submitProductivityProgress = async (cardName) => {
-      if (isStarted || pseconds >= 1 || pminutes >= 1 || phours >= 1 || pdays >= 1) {
+      if (isStarted || seconds >= 1 || minutes >= 1 || hours >= 1 || days >= 1) {
         const timestamp = new Date().getTime(); // Get the current timestamp
         let currentTime = "";
         
-        if (pdays > 0) {
-          currentTime += `${pdays < 10 ? "0" + pdays : pdays}d `;
+        if (days > 0) {
+          currentTime += `${days < 10 ? "0" + days : days}d `;
         }
         
-        if (phours > 0) {
-          currentTime += `${phours < 10 ? "0" + phours : phours}h `;
+        if (hours > 0) {
+          currentTime += `${hours < 10 ? "0" + hours : hours}h `;
         }
         
-        if (pminutes > 0) {
-          currentTime += `${pminutes < 10 ? "0" + pminutes : pminutes}m `;
+        if (minutes > 0) {
+          currentTime += `${minutes < 10 ? "0" + minutes : minutes}m `;
         }
         
-        if (pseconds > 0) {
-          currentTime += `${pseconds < 10 ? "0" + pseconds : pseconds}s`;
+        if (seconds > 0) {
+          currentTime += `${seconds < 10 ? "0" + seconds : seconds}s`;
         }
     
         try {
@@ -166,10 +118,10 @@ export default function Productivity(){
           fetchHistory();
     
           // Reset the timer values
-          setPMinutes(0);
-          setPSeconds(0);
-          setPHours(0);
-          setPDays(0);
+          setMinutes(0);
+          setSeconds(0);
+          setHours(0);
+          setDays(0);
           setIsStarted(false)
     
           console.log("Timer progress submitted successfully. Document ID:", docRef.id);
@@ -211,7 +163,7 @@ export default function Productivity(){
     
     const handleSubmit = async () => {
       // to prevent multiple submiting by user!
-      if ( isSubmitting || isStarted || pseconds >= 1 || pminutes >= 1 || phours >= 1 || pdays >= 1) {
+      if ( isSubmitting || isStarted || seconds >= 1 || minutes >= 1 || hours >= 1 || days >= 1) {
         try {
           setIsSubmitting(true); // Disable the submit button
     
@@ -262,10 +214,10 @@ export default function Productivity(){
             </div>
             <div className="p-timer-content">
                 <div className="p-timer-container">    
-                    <span className="p-timer-width"><h1 className="p-timer"> {pdays < 10 ? "0" + pdays : pdays} </h1><span>d</span></span>
-                    <span className="p-timer-width"><h1 className="p-timer">{phours < 10 ? "0" + phours: phours}</h1><span>h</span></span>
-                    <span className="p-timer-width"><h1 className="p-timer">{pminutes < 10 ? "0" + pminutes : pminutes}</h1><span>m</span></span>
-                    <span className="p-timer-width"><h1 className="p-timer">{pseconds <10 ? "0" + pseconds : pseconds}</h1><span>s</span></span>     
+                    <span className="p-timer-width"><h1 className="p-timer"> {days < 10 ? "0" + days : days} </h1><span>d</span></span>
+                    <span className="p-timer-width"><h1 className="p-timer">{hours < 10 ? "0" + hours: hours}</h1><span>h</span></span>
+                    <span className="p-timer-width"><h1 className="p-timer">{minutes < 10 ? "0" + minutes : minutes}</h1><span>m</span></span>
+                    <span className="p-timer-width"><h1 className="p-timer">{seconds <10 ? "0" + seconds : seconds}</h1><span>s</span></span>     
                 </div>
                 <div className="p-buttons">
                   <button className="p-restart" onClick={handleReset}>

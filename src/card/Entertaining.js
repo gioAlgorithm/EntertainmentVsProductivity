@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { db, auth } from "../utils/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { collection, addDoc, getDocs, query, orderBy, limit } from "firebase/firestore";
 import './card css/e-card.css';
 import { TbPlayerPause } from 'react-icons/tb';
 import { BsFillPlayFill } from 'react-icons/bs';
+import { TimerContext } from "../context/TimerContext";
 
 
 
@@ -25,17 +26,7 @@ function ResetConfirmation({ onConfirm, onCancel }) {
 }
 
 export default function Entertaining() {
-  // timer states
-  const [startTime, setStartTime] = useState(null);
-  const [eseconds, setESeconds] = useState(0);
-  const [eminutes, setEMinutes] = useState(0);
-  const [ehours, setEHours] = useState(0);
-  const [edays, setEDays] = useState(0);
-
-  // if timer is runing
-  const [isStarted, setIsStarted] = useState(false);
-  const [stoppedAt, setStoppedAt] = useState(null);
-
+  
   // reset confirmation state
   const [showConfirm, setShowConfirm] = useState(false);
   // history state
@@ -44,49 +35,12 @@ export default function Entertaining() {
   // submit state
   const [isSubmitting, setIsSubmitting] = useState(false); 
 
+  const {isStarted, setIsStarted, stoppedAt, setStoppedAt, 
+         seconds, setSeconds, minutes, setMinutes, hours, setHours, 
+         days, setDays, setStartTime, timerRef} = useContext(TimerContext)
 
-  const timerRef = useRef();
 
-  useEffect(() => {
-    if (isStarted) {
-      setStartTime(Date.now());
-    } else {
-      clearInterval(timerRef.current);
-      setStartTime(null);
-    }
-  }, [isStarted]);
-
-  useEffect(() => {
-    if (startTime && isStarted) {
-      if (stoppedAt) {
-        clearInterval(timerRef.current);
-      } else {
-        if (startTime) {
-          const handleTimerInterval = () => {
-            const elapsedTime = Date.now() - startTime;
-            const days = Math.floor(elapsedTime / (1000 * 60 * 60 * 24));
-            const hours = Math.floor(
-              (elapsedTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-            );
-            const minutes = Math.floor(
-              (elapsedTime % (1000 * 60 * 60)) / (1000 * 60)
-            );
-            const seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
-
-            setEDays(days);
-            setEHours(hours);
-            setEMinutes(minutes);
-            setESeconds(seconds);
-          };
-
-          handleTimerInterval();
-          timerRef.current = setInterval(handleTimerInterval, 1000);
-        }
-      }
-    }
-    return () => clearInterval(timerRef.current);
-  }, [isStarted, stoppedAt, startTime]);
-
+  
   // stop, start, reset logic
 
   function handleStart() {
@@ -110,16 +64,16 @@ export default function Entertaining() {
  
   // reset button confirmation container logic
   const handleReset = ()=>{
-    if(isStarted || eseconds >= 1 || eminutes >= 1 || ehours >= 1 || edays>= 1){
+    if(isStarted || seconds >= 1 || minutes >= 1 || hours >= 1 || days>= 1){
       setShowConfirm(true)
     }
   }
 
   const handleConfirmReset = ()=>{
-    setEMinutes(0)
-    setESeconds(0)
-    setEHours(0)
-    setEDays(0)
+    setMinutes(0)
+    setSeconds(0)
+    setHours(0)
+    setDays(0)
     setIsStarted(false);
     setStoppedAt(null);
     clearInterval(timerRef.current);
@@ -133,24 +87,24 @@ export default function Entertaining() {
   // submit button logic
 
   const submitEntertainmentProgress = async (cardName) => {
-    if (isStarted || eseconds >= 1 || eminutes >= 1 || ehours >= 1 || edays >= 1) {
+    if (isStarted || seconds >= 1 || minutes >= 1 || hours >= 1 || days >= 1) {
       const timestamp = new Date().getTime(); // Get the current timestamp
       let currentTime = "";
       
-      if (edays > 0) {
-        currentTime += `${edays < 10 ? "0" + edays : edays}d `;
+      if (days > 0) {
+        currentTime += `${days < 10 ? "0" + days : days}d `;
       }
       
-      if (ehours > 0) {
-        currentTime += `${ehours < 10 ? "0" + ehours : ehours}h `;
+      if (hours > 0) {
+        currentTime += `${hours < 10 ? "0" + hours : hours}h `;
       }
       
-      if (eminutes > 0) {
-        currentTime += `${eminutes < 10 ? "0" + eminutes : eminutes}m `;
+      if (minutes > 0) {
+        currentTime += `${minutes < 10 ? "0" + minutes : minutes}m `;
       }
       
-      if (eseconds > 0) {
-        currentTime += `${eseconds < 10 ? "0" + eseconds : eseconds}s`;
+      if (seconds > 0) {
+        currentTime += `${seconds < 10 ? "0" + seconds : seconds}s`;
       }
   
       try {
@@ -166,10 +120,10 @@ export default function Entertaining() {
         fetchHistory();
   
         // Reset the timer values
-        setEMinutes(0);
-        setESeconds(0);
-        setEHours(0);
-        setEDays(0);
+        setMinutes(0);
+        setSeconds(0);
+        setHours(0);
+        setDays(0);
         setIsStarted(false)
   
         console.log("Timer progress submitted successfully. Document ID:", docRef.id);
@@ -211,7 +165,7 @@ export default function Entertaining() {
   
   const handleSubmit = async () => {
     // to prevent multiple submiting by user!
-    if ( isSubmitting || isStarted || eseconds >= 1 || eminutes >= 1 || ehours >= 1 || edays >= 1) {
+    if ( isSubmitting || isStarted || seconds >= 1 || minutes >= 1 || hours >= 1 || days >= 1) {
       try {
         setIsSubmitting(true); // Disable the submit button
   
@@ -262,10 +216,10 @@ export default function Entertaining() {
 
       <div className="e-timer-content">
         <div className="e-timer-container">
-          <span className="e-timer-width"><h1 className="e-timer"> {edays < 10 ? '0' + edays : edays} </h1><span>d</span></span>
-          <span className="e-timer-width"><h1 className="e-timer">{ehours < 10 ? '0' + ehours : ehours}</h1><span>h</span></span>
-          <span className="e-timer-width"><h1 className="e-timer">{eminutes < 10 ? '0' + eminutes : eminutes}</h1><span>m</span></span>
-          <span className="e-timer-width"><h1 className="e-timer">{eseconds < 10 ? '0' + eseconds : eseconds}</h1><span>s</span></span>
+          <span className="e-timer-width"><h1 className="e-timer"> {days < 10 ? '0' + days : days} </h1><span>d</span></span>
+          <span className="e-timer-width"><h1 className="e-timer">{hours < 10 ? '0' + hours : hours}</h1><span>h</span></span>
+          <span className="e-timer-width"><h1 className="e-timer">{minutes < 10 ? '0' + minutes : minutes}</h1><span>m</span></span>
+          <span className="e-timer-width"><h1 className="e-timer">{seconds < 10 ? '0' + seconds : seconds}</h1><span>s</span></span>
         </div>
         <div className="e-buttons">
           <button className="e-restart" onClick={handleReset}>
@@ -284,7 +238,7 @@ export default function Entertaining() {
               )}
             </button>
           ) : (
-            <button className="e-stop" onClick={handleStart}>
+            <button className="e-stop" onClick={handleStart} >
               Start <BsFillPlayFill />
             </button>
           )}
