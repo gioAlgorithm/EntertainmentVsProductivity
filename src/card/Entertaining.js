@@ -35,24 +35,26 @@ export default function Entertaining() {
   // submit state
   const [isSubmitting, setIsSubmitting] = useState(false); 
 
-  const {isStarted, setIsStarted, stoppedAt, setStoppedAt, 
-         seconds, setSeconds, minutes, setMinutes, hours, setHours, 
-         days, setDays, setStartTime, timerRef} = useContext(TimerContext)
+  const {
+          entertainmentStarted, setEntertainmentStarted, stoppedAtEntertainment, setStoppedAtEntertainment, 
+          eseconds, setESeconds, eminutes, setEMinutes, ehours, setEHours, 
+          edays, setEDays, setStartEntertainment, entertainmentTimerRef,productivityStarted
+        } = useContext(TimerContext)
 
 
   
   // stop, start, reset logic
 
   function handleStart() {
-    setIsStarted(true);
+    setEntertainmentStarted(true);
   }
 
   function handleToggleStop() {
-    setStoppedAt((prevStoppedAtState) => {
+    setStoppedAtEntertainment((prevStoppedAtState) => {
       if (prevStoppedAtState === null) {
         return Date.now();
       } else {
-        setStartTime(
+        setStartEntertainment(
           (prevStartTimeState) =>
             prevStartTimeState + (Date.now() - prevStoppedAtState)
         );
@@ -64,19 +66,19 @@ export default function Entertaining() {
  
   // reset button confirmation container logic
   const handleReset = ()=>{
-    if(isStarted || seconds >= 1 || minutes >= 1 || hours >= 1 || days>= 1){
+    if(entertainmentStarted || eseconds >= 1 || eminutes >= 1 || ehours >= 1 || edays>= 1){
       setShowConfirm(true)
     }
   }
 
   const handleConfirmReset = ()=>{
-    setMinutes(0)
-    setSeconds(0)
-    setHours(0)
-    setDays(0)
-    setIsStarted(false);
-    setStoppedAt(null);
-    clearInterval(timerRef.current);
+    setEMinutes(0)
+    setESeconds(0)
+    setEHours(0)
+    setEDays(0)
+    setEntertainmentStarted(false);
+    setStoppedAtEntertainment(null);
+    clearInterval(entertainmentTimerRef.current);
     setShowConfirm(false)
   }
 
@@ -87,24 +89,24 @@ export default function Entertaining() {
   // submit button logic
 
   const submitEntertainmentProgress = async (cardName) => {
-    if (isStarted || seconds >= 1 || minutes >= 1 || hours >= 1 || days >= 1) {
+    if (entertainmentStarted || eseconds >= 1 || eminutes >= 1 || ehours >= 1 || edays >= 1) {
       const timestamp = new Date().getTime(); // Get the current timestamp
       let currentTime = "";
       
-      if (days > 0) {
-        currentTime += `${days < 10 ? "0" + days : days}d `;
+      if (edays > 0) {
+        currentTime += `${edays < 10 ? "0" + edays : edays}d `;
       }
       
-      if (hours > 0) {
-        currentTime += `${hours < 10 ? "0" + hours : hours}h `;
+      if (ehours > 0) {
+        currentTime += `${ehours < 10 ? "0" + ehours : ehours}h `;
       }
       
-      if (minutes > 0) {
-        currentTime += `${minutes < 10 ? "0" + minutes : minutes}m `;
+      if (eminutes > 0) {
+        currentTime += `${eminutes < 10 ? "0" + eminutes : eminutes}m `;
       }
       
-      if (seconds > 0) {
-        currentTime += `${seconds < 10 ? "0" + seconds : seconds}s`;
+      if (eseconds > 0) {
+        currentTime += `${eseconds < 10 ? "0" + eseconds : eseconds}s`;
       }
   
       try {
@@ -120,11 +122,11 @@ export default function Entertaining() {
         fetchHistory();
   
         // Reset the timer values
-        setMinutes(0);
-        setSeconds(0);
-        setHours(0);
-        setDays(0);
-        setIsStarted(false)
+        setEMinutes(0);
+        setESeconds(0);
+        setEHours(0);
+        setEDays(0);
+        setEntertainmentStarted(false)
   
         console.log("Timer progress submitted successfully. Document ID:", docRef.id);
       } catch (error) {
@@ -165,7 +167,7 @@ export default function Entertaining() {
   
   const handleSubmit = async () => {
     // to prevent multiple submiting by user!
-    if ( isSubmitting || isStarted || seconds >= 1 || minutes >= 1 || hours >= 1 || days >= 1) {
+    if ( isSubmitting || entertainmentStarted || eseconds >= 1 || eminutes >= 1 || ehours >= 1 || edays >= 1) {
       try {
         setIsSubmitting(true); // Disable the submit button
   
@@ -183,6 +185,11 @@ export default function Entertaining() {
         setIsSubmitting(false); // Update submission status in case of error
       }
     }
+    if(entertainmentStarted && eseconds < 1 && eminutes < 1 && ehours < 1 && edays < 1){
+      setEntertainmentStarted(false)
+    }
+      setStartEntertainment(null)
+      setStoppedAtEntertainment(null)
   };
   
 
@@ -216,18 +223,18 @@ export default function Entertaining() {
 
       <div className="e-timer-content">
         <div className="e-timer-container">
-          <span className="e-timer-width"><h1 className="e-timer"> {days < 10 ? '0' + days : days} </h1><span>d</span></span>
-          <span className="e-timer-width"><h1 className="e-timer">{hours < 10 ? '0' + hours : hours}</h1><span>h</span></span>
-          <span className="e-timer-width"><h1 className="e-timer">{minutes < 10 ? '0' + minutes : minutes}</h1><span>m</span></span>
-          <span className="e-timer-width"><h1 className="e-timer">{seconds < 10 ? '0' + seconds : seconds}</h1><span>s</span></span>
+          <span className="e-timer-width"><h1 className="e-timer"> {edays < 10 ? '0' + edays : edays} </h1><span>d</span></span>
+          <span className="e-timer-width"><h1 className="e-timer">{ehours < 10 ? '0' + ehours : ehours}</h1><span>h</span></span>
+          <span className="e-timer-width"><h1 className="e-timer">{eminutes < 10 ? '0' + eminutes : eminutes}</h1><span>m</span></span>
+          <span className="e-timer-width"><h1 className="e-timer">{eseconds < 10 ? '0' + eseconds : eseconds}</h1><span>s</span></span>
         </div>
         <div className="e-buttons">
           <button className="e-restart" onClick={handleReset}>
             Reset
           </button>
-          {isStarted ? (
-            <button className="e-stop" onClick={handleToggleStop}>
-              {!stoppedAt ? (
+          {entertainmentStarted ? (
+            <button className="e-stop" onClick={handleToggleStop} disabled={productivityStarted === true}>
+              {!stoppedAtEntertainment ? (
                 <>
                   Stop <TbPlayerPause />
                 </>
@@ -238,7 +245,7 @@ export default function Entertaining() {
               )}
             </button>
           ) : (
-            <button className="e-stop" onClick={handleStart} >
+            <button className="e-stop" onClick={handleStart} disabled={productivityStarted === true}>
               Start <BsFillPlayFill />
             </button>
           )}
