@@ -43,7 +43,11 @@
     border-left: 1px solid black;
 }
 .p-total-time{
-    height: 125px;
+    height: 83.3px;
+}
+.p-total-time p{
+    margin-top: 3px;
+    font-size: 19px;
 }
 .p-total-time-title{
     margin-top: 10px;
@@ -53,13 +57,31 @@
     border-bottom: 2px solid black;
 }
 .p-total-time-hr{
-    height: 125px;
+    height: 83.3px;
+}
+.p-total-time-hr p{
+    margin-top: 3px;
+    font-size: 19px;
 }
 .p-total-time-title-hr{
     margin-top: 10px;
     width: 140px;
     text-align: center;
     font-size: 20px;
+    border-bottom: 2px solid black;
+}
+.p-total-time-min{
+    height: 83.3px;
+}
+.p-total-time-min p{
+    margin-top: 3px;
+    font-size: 19px;
+}
+.p-total-time-title-min{
+    margin-top: 10px;
+    width: 140px;
+    text-align: center;
+    font-size: 19px;
     border-bottom: 2px solid black;
 }
 .title-productive{
