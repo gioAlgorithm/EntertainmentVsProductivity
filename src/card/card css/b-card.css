@@ -1,5 +1,6 @@
 /* Balance container */
 .balance-card{
+    font-family: 'Pangolin', cursive;
     width: 1010px;
     height: 200px;
     background-color: aqua;
@@ -9,4 +10,32 @@
 .balance-title{
     border-bottom: 2px solid black;
     text-align: center;
+}
+.inner-balance{
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+}
+.encourage-text{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 68%;
+    margin-top: -35px;
+    font-size: 21px;
+}
+.encourage-text p{
+    line-height: 28px;
+    letter-spacing: 0.5px;
+}
+.encourage-text p span{
+    font-weight: 600;
+}
+.balance-animation-container{
+    width: 28%;
 }

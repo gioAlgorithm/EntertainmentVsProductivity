@@ -6,6 +6,7 @@ import { TbPlayerPause } from "react-icons/tb";
 import {BsFillPlayFill} from "react-icons/bs"
 import React, { useState, useEffect, useContext } from "react";
 import { TimerContext } from "../context/TimerContext";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 
 
@@ -25,7 +26,7 @@ function ResetConfirmation({ onConfirm, onCancel }) {
   );
 }
 
-export default function Productivity(){
+export default function Productivity({setShowSignInWarning}){
 
     // reset confirmation state
     const [showConfirm, setShowConfirm] = useState(false);
@@ -33,16 +34,17 @@ export default function Productivity(){
     const [history, setHistory] = useState([]);
     // history state where im storing lifetime submissions
     const [totalHistory, setTotalHistory] = useState([])
-    // Add a new state variable to hold the total time
-    const [totalTime, setTotalTime] = useState(0);
+    // importing user to disable submit button
+    const [user ] = useAuthState(auth)
+    
 
     // submit state
     const [isSubmitting, setIsSubmitting] = useState(false); 
 
     const {
             productivityStarted, setProductivityStarted, stoppedAtProductivity, setStoppedAtProductivity, 
-            pseconds, setPSeconds, pminutes, setPMinutes, phours, setPHours, 
-            pdays, setPDays, setStartProductivity, productivityTimerRef,entertainmentStarted
+            pseconds, setPSeconds, pminutes, setPMinutes, phours, setPHours, pdays, setPDays, 
+            setStartProductivity, productivityTimerRef,entertainmentStarted, totalTimeP, setTotalTimeP
           } = useContext(TimerContext)
    
 
@@ -195,11 +197,11 @@ export default function Productivity(){
           });
         });
     
-        setTotalTime(totalSeconds);
+        setTotalTimeP(totalSeconds);
       };
     
       calculateTotalTime();
-    }, [totalHistory]);
+    }, [totalHistory, setTotalTimeP]);
     const formatTotalTime = (totalSeconds) => {
       const days = Math.floor(totalSeconds / (24 * 60 * 60));
       const hours = Math.floor((totalSeconds % (24 * 60 * 60)) / (60 * 60));
@@ -244,8 +246,37 @@ export default function Productivity(){
       }
       setStartProductivity(null)
       setStoppedAtProductivity(null)
+      setProductivityStarted(false)
     };
+
+  // Add the beforeunload event listener when the component mounts
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      if (productivityStarted) {
+        event.preventDefault();
+        const promptMessage = 'Please submit your progress before leaving the website. Are you sure you want to leave?';
+        event.returnValue = promptMessage;
+        return promptMessage;
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [productivityStarted]);
+
+  const warningHandler = ()=>{
+    if(user){
+      handleSubmit()
+    }if(!user){
+      setShowSignInWarning(true)
+    }
     
+    
+  }
 
 
 
@@ -269,15 +300,15 @@ export default function Productivity(){
                 <div className="p-total-time-container">
                   <div className="p-total-time">
                     <h1 className="p-total-time-title">Total Time</h1>
-                    <p>{formatTotalTime(totalTime)}</p>
+                    <p>{formatTotalTime(totalTimeP)}</p>
                   </div>
                   <div className="p-total-time-hr">
                     <h1 className="p-total-time-title-hr">Total Time in hr</h1>   
-                    <p>{formatTotalTimeInHours(totalTime)}</p>
+                    <p>{formatTotalTimeInHours(totalTimeP)}</p>
                   </div>
                   <div className="p-total-time-min">
                     <h1 className="p-total-time-title-min">Total Time in min</h1>  
-                    <p>{formatTotalTimeInMinutes(totalTime)}</p> 
+                    <p>{formatTotalTimeInMinutes(totalTimeP)}</p> 
                   </div>
                 </div>
             </div>
@@ -309,7 +340,7 @@ export default function Productivity(){
                       Start <BsFillPlayFill />
                     </button>
                   )}
-                  <button className="p-submit" onClick={handleSubmit}>
+                  <button className="p-submit" onClick={warningHandler}>
                     Submit
                   </button>
                 </div>

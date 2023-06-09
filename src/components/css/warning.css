@@ -1,0 +1,44 @@
+.warning-container{
+    font-family: 'Pangolin', cursive;
+    position: absolute;
+    display: flex;
+    margin-top: 12%;
+    justify-content: center;
+    width: 100%;
+    height: 100%;    
+}
+.sign-in-warning-container{
+    position: relative;
+    width: 350px;
+    height: 180px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid black;
+    background-color: rgb(209, 33, 33);
+}
+.sign-in-warning-container h3{
+    margin-top: 7px;
+    width: 80%;
+    font-size: 30px;
+    padding: 3px;
+    border-bottom: 2px solid rgb(0, 0, 0);
+    text-align: center;
+}
+.warning-close{
+    position: absolute;
+    font-size: 30px;
+    margin-left: 300px;
+    margin-top: 4px;
+    cursor: pointer;
+}
+.sign-in-warning-container h3 svg{
+    margin-bottom: -4px;
+}
+.sign-in-warning-container p{
+    text-align: center;
+    width: 80%;
+    margin-top: 10px;
+    font-size: 20px;
+}

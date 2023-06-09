@@ -14,6 +14,9 @@ export const TimerProvider = ({ children }) => {
   const [entertainmentStarted, setEntertainmentStarted] = useState(false);
   const [stoppedAtEntertainment, setStoppedAtEntertainment] = useState(null);
 
+  // Add a new state variable to hold the total time
+  const [totalTimeE, setTotalTimeE] = useState(0);
+
 
   const entertainmentTimerRef = useRef();
 
@@ -69,6 +72,9 @@ export const TimerProvider = ({ children }) => {
   const [productivityStarted, setProductivityStarted] = useState(false);
   const [stoppedAtProductivity, setStoppedAtProductivity] = useState(null);
 
+  // Add a new state variable to hold the total time
+  const [totalTimeP, setTotalTimeP] = useState(0);
+
   const productivityTimerRef = useRef();
 
   useEffect(() => {
@@ -115,9 +121,9 @@ export const TimerProvider = ({ children }) => {
   return (
     <TimerContext.Provider 
       value={{entertainmentStarted, setEntertainmentStarted, stoppedAtEntertainment, setStoppedAtEntertainment,startEntertainment, setStartEntertainment,  
-              eseconds, setESeconds,eminutes, setEMinutes, ehours, setEHours, edays, setEDays, entertainmentTimerRef,
+              eseconds, setESeconds,eminutes, setEMinutes, ehours, setEHours, edays, setEDays, entertainmentTimerRef,totalTimeE, setTotalTimeE,
               productivityStarted, setProductivityStarted, stoppedAtProductivity, setStoppedAtProductivity, startProductivity, setStartProductivity,
-              pseconds, setPSeconds,pminutes, setPMinutes, phours, setPHours, pdays, setPDays,productivityTimerRef
+              pseconds, setPSeconds,pminutes, setPMinutes, phours, setPHours, pdays, setPDays,productivityTimerRef, totalTimeP, setTotalTimeP
       }}
     >
       {children}
