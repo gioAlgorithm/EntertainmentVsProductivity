@@ -25,17 +25,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 68%;
+    width: 93%;
     margin-top: -35px;
-    font-size: 21px;
+    font-size: 26px;
 }
 .encourage-text p{
-    line-height: 28px;
+    line-height: 34px;
     letter-spacing: 0.5px;
 }
 .encourage-text p span{
     font-weight: 600;
-}
-.balance-animation-container{
-    width: 28%;
 }

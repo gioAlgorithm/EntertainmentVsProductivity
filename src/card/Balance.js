@@ -82,9 +82,6 @@ export default function Balance(){
                 <div className="encourage-text">
                     {displayText}
                 </div>
-                <div className="balance-animation-container">
-
-                </div>
             </div>
         </div>
     )
