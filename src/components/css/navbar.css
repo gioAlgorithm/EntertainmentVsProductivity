@@ -59,3 +59,21 @@ button{
 .select-active .select-icon {
     transform: rotate(180deg);
 }
+
+/* responsive */
+@media (max-width: 1120px){
+    .navbar{
+        justify-content: space-between;
+        align-items: center;
+        
+        
+    }
+    .logo{
+        position: relative;
+    }
+    .select{
+        margin-left: 0;
+        margin-top: 0;
+        margin-bottom: 13px;
+    }
+}

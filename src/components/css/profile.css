@@ -96,3 +96,8 @@
 .inner-profile-active .profile-select-icon {
     transform: rotate(180deg);
 }
+@media (max-width: 1120px){
+    .profile{
+        margin-left: 0;
+    }
+}
