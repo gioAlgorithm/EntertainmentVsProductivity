@@ -17,7 +17,7 @@ export default function ProfilePage(){
                 </div>
                 
             </div>
-            
+            <p className="copyright">Copyright © 2023 GioAlgorithm All Rights Reserved.</p>
         </div>
     )
 }

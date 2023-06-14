@@ -5,6 +5,10 @@ export default function Eachievement(){
     return(
         <div className="e-achievement-container">
             <h1 className="e-achievement-title">Entertainment Achievements</h1>
+
+            <div>
+                <p className="e-coming-soon">Coming Soon</p>
+            </div>
             
         </div>
     )

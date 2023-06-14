@@ -2,7 +2,6 @@
 .productive-card{
     font-family: 'Pangolin', cursive;
     width: 400px;
-    min-width: 400px;
     margin-left: 10px;
     height: 500px;
     padding: 20px;
@@ -233,4 +232,86 @@
     border-top-right-radius:50px;
     border-bottom-right-radius: 50px;
 }
+/* responsive */
+@media (max-width: 920px){
+    .productive-card{
+        margin-left: 0;
+        width: 600px;
+    }
+    .p-reset-confirm-opacity{
+        width: 600px;
+    }
+    .p-reset-confirm-container{
+        margin-left: 180px;
+    }
+}
+@media (max-width: 670px){
+    .productive-card{
+        width: 500px;
+    }
+    .p-reset-confirm-opacity{
+        width: 500px;
+    }
+    .p-reset-confirm-container{
+        margin-left: 135px;
+    }
+}
+@media (max-width: 570px){
+    .productive-card{
+        width: 400px;
+    }
+    .p-reset-confirm-opacity{
+        width: 400px;
+    }
+    .p-reset-confirm-container{
+        margin-left: 90px;
+    }
+}
+@media (max-width: 470px){
+    .productive-card{
+        width: 300px;
+        padding: 10px;
+        box-shadow: none;
+    }
+    .p-reset-confirm-opacity{
+        width: 300px;
+    }
+    .p-reset-confirm-container{
+        margin-left: 40px;
+    }
+    .p-timer-width{
+        width: 75px;
+    }
+    .p-timer{
+        font-size: 40px;
+    }
+    .p-timer-width span{
+        margin-top: 50px;
+        margin-left: 58px;
+        font-size: 21px;
+    }
+    .p-buttons{
+        width: 270px;
+        height: 45px;
+    }
+    .p-buttons button{
+        font-size: 19px;
+        height: 42.5px;
+        
+    }
+    .p-stop{
+        width: 89px;
+    }
+    .p-stop svg{
+        font-size: 19px;
+        
+    }
+    .p-restart{
+        width: 89px;
+    }
+    .p-submit{
+        width: 89px;
+    }
+}
+
 

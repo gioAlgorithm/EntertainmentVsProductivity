@@ -33,6 +33,51 @@
     line-height: 34px;
     letter-spacing: 0.5px;
 }
-.encourage-text p span{
-    font-weight: 600;
+/* responsive */
+@media (max-width: 1120px){
+   .balance-card{
+    width: 860px;
+   }
+   .encourage-text{
+    font-size: 24px;
+   }
+   .encourage-text p{
+    line-height: 31px;
+   }
+}
+@media (max-width: 920px){
+    .balance-card{
+        width: 599px;
+        height: auto;
+        margin-left: 1px;
+        
+    }
+    .encourage-text{
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+}
+@media (max-width: 670px){
+    .balance-card{
+        width: 500px;
+    }
+    .encourage-text{
+        font-size: 22px;
+    }
+    .encourage-text p{
+        line-height: 28px;
+    }
+}
+@media (max-width: 570px){
+    .balance-card{
+        width: 399px;
+    }
+}
+@media (max-width: 470px){
+    .balance-card{
+        width: 290px;
+        margin-left: 0;
+        padding: 15px;
+        box-shadow: none;
+    }
 }

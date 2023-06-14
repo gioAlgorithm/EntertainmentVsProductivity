@@ -3,6 +3,7 @@ import {useAuthState} from "react-firebase-hooks/auth"
 import { FaAngleUp } from "react-icons/fa";
 import {auth} from "../utils/firebase"
 import logo from "../image/logo.png"
+import MiniLogo from "../image/logo-mobile.png"
 import "./css/navbar.css"
 import SignIn from "./SignIn";
 import Profile from "./Profile";
@@ -40,6 +41,8 @@ export default function Navbar(){
     return(
         
         <div className="navbar">
+            
+            <Link to="/"><img alt="logo" src={MiniLogo} className="mini-logo"/></Link>
             <Link to="/"><img alt="logo" src={logo} className="logo"/></Link>
             {user === null &&
                 <div ref={menuRef} className={`select ${dropdown ? "select-active" : ""}`}>

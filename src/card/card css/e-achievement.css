@@ -1,16 +1,64 @@
 .e-achievement-container{
     font-family: 'Pangolin', cursive;
-    width: 500px;
-    min-width: 400px;
-    margin-right: 10px;
-    height: 500px;
-    padding: 20px;
+    max-width: 1100px;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     box-shadow: rgba(31, 30, 30, 1) 6px 6px;
     background-color: rgb(185, 4, 185);
 }
 .e-achievement-title{
     padding-bottom: 3px;
-    width: 100%;
+    width: 96%;
     border-bottom: 2px solid black;
     text-align: center;
+}
+/* coming soon animation */
+.e-coming-soon
+{   
+    font-weight: 700;
+    text-align: center;
+    font-size: 70px;
+    margin-top: 5%;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #c504bb, #7e0b6e, #000);
+    letter-spacing: 5px;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-repeat: no-repeat;
+    background-size: 80%;
+    animation: shine 5s linear infinite;
+    position: relative;
+  }
+  
+  @keyframes shine {
+    0% {
+      background-position-x: -500%;
+    }
+    100% {
+      background-position-x: 500%;
+    }
+  }
+
+
+
+
+
+/* responsive */
+@media(max-width: 530px){
+    .e-coming-soon{
+        margin-top: 15%;
+        font-size: 40px;
+    }
+}
+@media(max-width: 430px){
+    .e-achievement-container{
+        box-shadow: none;
+    }
+    .e-achievement-title{
+        font-size: 24px;
+    }
 }

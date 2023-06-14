@@ -1,11 +1,12 @@
 .warning-container{
     font-family: 'Pangolin', cursive;
-    position: absolute;
+    position: fixed;
     display: flex;
     margin-top: 12%;
     justify-content: center;
     width: 100%;
     height: 100%;    
+    z-index: 1000;
 }
 .sign-in-warning-container{
     position: relative;
@@ -41,4 +42,12 @@
     width: 80%;
     margin-top: 10px;
     font-size: 20px;
+}
+@media(max-width: 450px){
+    .sign-in-warning-container{
+        width: 250px;
+    }
+    .warning-close{
+        margin-left: 210px;
+    }
 }

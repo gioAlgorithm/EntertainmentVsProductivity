@@ -3,7 +3,6 @@
 .entertaining-card{
     font-family: 'Pangolin', cursive;
     width: 400px;
-    min-width: 400px;
     margin-right: 10px;
     height: 500px;
     padding: 20px;
@@ -238,4 +237,85 @@
     margin-right: 1px;
     border-top-right-radius:50px;
     border-bottom-right-radius: 50px;
+}
+/* responsive */
+@media (max-width: 920px){
+    .entertaining-card{
+        margin-right: 0;
+        width: 600px;
+    }
+    .e-reset-confirm-opacity{
+        width: 600px;
+    }
+    .e-reset-confirm-container{
+        margin-left: 180px;
+    }
+}
+@media (max-width: 670px){
+    .entertaining-card{
+        width: 500px;
+    }
+    .e-reset-confirm-opacity{
+        width: 500px;
+    }
+    .e-reset-confirm-container{
+        margin-left: 135px;
+    }
+}
+@media (max-width: 570px){
+    .entertaining-card{
+        width: 400px;
+    }
+    .e-reset-confirm-opacity{
+        width: 400px;
+    }
+    .e-reset-confirm-container{
+        margin-left: 90px;
+    }
+}
+@media (max-width: 470px){
+    .entertaining-card{
+        width: 300px;
+        padding: 10px;
+        box-shadow: none;
+    }
+    .e-reset-confirm-opacity{
+        width: 300px;
+    }
+    .e-reset-confirm-container{
+        margin-left: 40px;
+    }
+    .e-timer-width{
+        width: 75px;
+    }
+    .e-timer{
+        font-size: 40px;
+    }
+    .e-timer-width span{
+        margin-top: 50px;
+        margin-left: 58px;
+        font-size: 21px;
+    }
+    .e-buttons{
+        width: 270px;
+        height: 45px;
+    }
+    .e-buttons button{
+        font-size: 19px;
+        height: 42.5px;
+        
+    }
+    .e-stop{
+        width: 89px;
+    }
+    .e-stop svg{
+        font-size: 19px;
+        
+    }
+    .e-restart{
+        width: 89px;
+    }
+    .e-submit{
+        width: 89px;
+    }
 }
