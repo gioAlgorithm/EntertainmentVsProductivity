@@ -41,9 +41,23 @@ export default function Navbar(){
     return(
         
         <div className="navbar">
+            <div>
+                <div className="hover">
+                    <span>?</span>
+                    <h1>⏰ Time Tracker</h1>
+                    <p>You get to decide if you want to do something productive or have fun. Just hit a button and start the timer for "Focus" or "Fun" – easy peasy!</p>
+
+                    <h1>⚖️ Balancing Act</h1>
+                    <p>Here's where the magic happens. We add up your productive moments and your playtime. If playtime takes over, we nudge you to do a bit more work. If it's the other way around, we remind you to take a break!</p>
+
+                    <h1>🎉 Change It Up</h1>
+                    <p>Say bye-bye to feeling bad about having fun. With "Fun vs Focus," you're in charge of your story. Get ready for awesome accomplishments and really cool memories.
+                    Ready to rock a balanced, exciting life? Join the fun and start your adventure now!</p>
+                </div>
+            </div>
             
-            <Link to="/"><img alt="logo" src={MiniLogo} className="mini-logo"/></Link>
-            <Link to="/"><img alt="logo" src={logo} className="logo"/></Link>
+            <Link className="mini-logo"  to="/"><img alt="logo" src={MiniLogo} /></Link>
+            <Link className="logo-container" to="/"><img alt="logo" src={logo} /></Link>
             {user === null &&
                 <div ref={menuRef} className={`select ${dropdown ? "select-active" : ""}`}>
                     <button onClick={toggleDropdown} className="select-button">Sign in {<FaAngleUp className="select-icon" />}</button>

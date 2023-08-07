@@ -3,7 +3,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 83%;
     z-index: 5;
     cursor: pointer;
 }

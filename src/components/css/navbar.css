@@ -3,18 +3,17 @@
     display: flex;
     background-color: beige;
     height: 100px;
+    justify-content: space-around;
+    align-items: center;
 }
-.logo{
-    position: absolute;
-    left: 50%;
-    top: 0;
-    transform: translateX(-50%);
-    object-fit: contain;
+.logo-container img{
+    position: relative;
     width: 700px;
     height: 100px;
 }
 .mini-logo{
     display: none;
+    opacity: 0;
 }
 
 /* navigation select styles */
@@ -26,7 +25,7 @@ button{
     display: block;
     margin-top: 20px;
     font-size: 22px;
-    margin-left: 81%;
+    
     z-index: 100;
     
 }
@@ -66,18 +65,68 @@ button{
     transform: rotate(180deg);
 }
 
+/* hover style */
+.hover{
+    position: absolute;
+    background-color: rgb(231, 231, 182);
+    padding: 10px;
+    border-radius: 10px;
+    width: 300px;
+    height: 500px;
+    clip-path: circle(5.3% at 10% 6%);
+    transition: all .5s ease-in-out;
+    cursor: pointer;
+    z-index: 100;
+    margin-top: -35px;
+    margin-left: -40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hover:hover{
+    clip-path: circle(75%);
+    background-color: rgb(235, 235, 185);
+}
+
+.hover p{
+    margin-top: 10px;
+    color: rgba(32, 31, 29);
+    font-size: 1rem;
+    width: 90%;
+    text-align: center;
+    font-family: 'Pangolin', cursive;
+    margin-bottom: 15px;
+}
+.hover h1{
+    font-size: 1.5rem;
+    font-family: 'Pangolin', cursive;
+    font-weight: bold;
+}
+.hover span{ 
+    color: rgba(32, 31, 29);
+    font-weight: 500;
+    font-size: 2rem;
+    transition: color 1s;
+    position: absolute;
+    margin-top: 3px;
+    margin-left: -256px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.hover:hover span{
+    visibility: hidden;
+}
+
 /* responsive */
 @media (max-width: 1120px){
     .navbar{
         justify-content: space-between;
-        align-items: center;
         padding-left: 5%;
         padding-right: 5%;
         width: 90%;
         
-        
     }
-    .logo{
+    .logo-container{
         position: relative;
     }
     .select{
@@ -87,17 +136,24 @@ button{
     }
 }
 
-@media (max-width: 820px){
+@media (max-width: 845px){
     .navbar{
         justify-content: space-between;
     }
-    .logo{
+    .logo-container{
         display: none;
+        opacity: 0;
+        object-fit: none;
     }
     .mini-logo{
         position: relative;
         display: flex;
         height: 100px;
+        opacity: 1;
+        margin-left: 50px;
+    }
+    .hover{
+        margin-left: -10px;
     }
 }
 @media (max-width: 670px){
@@ -113,5 +169,7 @@ button{
     }
 }
 @media(max-width: 470px){
-    
+    .hover{
+        margin-left: -16px;
+    }
 }
