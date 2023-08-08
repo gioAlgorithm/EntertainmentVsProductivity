@@ -23,9 +23,7 @@ button{
 .select{
     position: relative;
     display: block;
-    margin-top: 20px;
     font-size: 22px;
-    
     z-index: 100;
     
 }
