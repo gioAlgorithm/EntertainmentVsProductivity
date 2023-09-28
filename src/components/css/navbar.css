@@ -74,7 +74,7 @@ button{
     clip-path: circle(5.3% at 10% 6%);
     transition: all .5s ease-in-out;
     cursor: pointer;
-    z-index: 100;
+    z-index: 100000;
     margin-top: -35px;
     margin-left: -40px;
     display: flex;

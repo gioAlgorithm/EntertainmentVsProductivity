@@ -45,7 +45,6 @@ export default function Main(){
     // rendering warning contaner
     const renderSignInWarning = () => {
       
-      
       return (
         <div ref={warnRef} className="warning-container" onClick={()=> {setShowSignInWarning(false)}}>
           <div className="sign-in-warning-container">

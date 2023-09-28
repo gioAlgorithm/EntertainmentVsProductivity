@@ -51,8 +51,10 @@ export default function Navbar(){
                     <p>Here's where the magic happens. We add up your productive moments and your playtime. If playtime takes over, we nudge you to do a bit more work. If it's the other way around, we remind you to take a break!</p>
 
                     <h1>🎉 Change It Up</h1>
-                    <p>Say bye-bye to feeling bad about having fun. With "Fun vs Focus," you're in charge of your story. Get ready for awesome accomplishments and really cool memories.
-                    Ready to rock a balanced, exciting life? Join the fun and start your adventure now!</p>
+                    <p>
+                        Say bye-bye to feeling bad about having fun. With "Fun vs Focus," you're in charge of your story. Get ready for awesome accomplishments and really cool memories.
+                        Ready to rock a balanced, exciting life? Join the fun and start your adventure now!
+                    </p>
                 </div>
             </div>
             

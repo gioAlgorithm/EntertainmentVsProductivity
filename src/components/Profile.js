@@ -24,7 +24,6 @@ export default function Profile({ user }) {
             }
         }
         
-
         document.addEventListener("mousedown", handler)
 
         return ()=>{
