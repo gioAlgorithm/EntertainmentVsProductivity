@@ -57,9 +57,10 @@ export default function Navbar(){
                     </p>
                 </div>
             </div>
-            
-            <Link className="mini-logo"  to="/"><img alt="logo" src={MiniLogo} /></Link>
-            <Link className="logo-container" to="/"><img alt="logo" src={logo} /></Link>
+            <div>
+                <Link className="mini-logo"  to="/"><img alt="logo" src={MiniLogo} /></Link>
+                <Link className="logo-container" to="/"><img alt="logo" src={logo} /></Link>
+            </div>
             {user === null &&
                 <div ref={menuRef} className={`select ${dropdown ? "select-active" : ""}`}>
                     <button onClick={toggleDropdown} className="select-button">Sign in {<FaAngleUp className="select-icon" />}</button>

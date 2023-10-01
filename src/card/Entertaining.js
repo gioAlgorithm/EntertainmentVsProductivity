@@ -326,7 +326,7 @@ export default function Entertaining({setShowSignInWarning}) {
           <span className="e-timer-width"><h1 className="e-timer">{eseconds < 10 ? '0' + eseconds : eseconds}</h1><span>s</span></span>
         </div>
         <div className="e-buttons">
-          <button className="e-restart" onClick={handleReset}>
+          <button className="e-restart" style={{paddingLeft: '1.5rem'}} onClick={handleReset}>
             Reset
           </button>
           {entertainmentStarted ? (

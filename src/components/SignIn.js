@@ -40,7 +40,9 @@ const SignInWithEmail = () => {
   return (
     <div className="sign-in-email-container">
       <form onSubmit={handleSignIn}>
-        <input className="sign-in-email" placeholder="Email" type="email" id="email" value={email} required onChange={(e) => setEmail(e.target.value)}/>
+        <div className="sign-in-email">
+          <input placeholder="Email" type="email" id="email" value={email} required onChange={(e) => setEmail(e.target.value)}/>
+        </div>
         <Password setPassword = {setPassword} password ={password} />
         <button className="sign-in-email-btn" type="submit">Sign In</button>
       </form>

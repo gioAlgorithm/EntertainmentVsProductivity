@@ -133,6 +133,7 @@
     margin-top: 15px;
     height: 55px;
     align-items: center;
+    
 }
 .e-buttons button{
     
@@ -142,7 +143,11 @@
     cursor: pointer;
     font-size: 24px;
     font-weight: 600;
-
+    color: black;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    
 }
 .e-buttons button:hover{
     background-color: black;
@@ -153,6 +158,7 @@
     height: 52.5px;
     border-top-left-radius: 40px;
     border-bottom-left-radius: 40px;
+    text-align: center;
 }
 .e-stop{
     height: 52.5px;
@@ -161,8 +167,8 @@
 .e-stop svg{
     vertical-align: middle;
     font-size: 26px;
-    margin-left: -5px;
-    margin-top: -3px;
+    margin-left: 1px;
+    margin-top: 2px;
 }
 .e-submit{
     width: 113px;

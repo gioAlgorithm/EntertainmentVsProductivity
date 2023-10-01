@@ -136,7 +136,10 @@
     cursor: pointer;
     font-size: 24px;
     font-weight: 600;
-
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: black;
 }
 .p-buttons button:hover{
     background-color: black;
@@ -155,8 +158,8 @@
 .p-stop svg{
     vertical-align: middle;
     font-size: 26px;
-    margin-left: -5px;
-    margin-top: -3px;
+    margin-left: 1px;
+    margin-top: 2px;
 }
 .p-submit{
     width: 113px;

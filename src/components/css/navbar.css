@@ -33,6 +33,7 @@ button{
     border-radius: 5px;
     background: none;
     font-size: 22px;
+    color: black;
     font-family: 'Pangolin', cursive;
 }
 .select-icon {
@@ -139,6 +140,11 @@ button{
         justify-content: space-between;
     }
     .logo-container{
+        display: none;
+        opacity: 0;
+        object-fit: none;
+    }
+    .logo-container img{
         display: none;
         opacity: 0;
         object-fit: none;

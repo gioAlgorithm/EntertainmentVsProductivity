@@ -35,16 +35,17 @@
 }
 .google-button{
     padding-right: 15px;
+    color: black;
 }
 .facebook-button{
     margin-top: 5px;
+    color: black;
 }
 .facebook-button svg{
     color: #3b5998;
 }
 /* sign in with email css */
 .sign-in-email-container{
-    width: 202px;
     margin-bottom: 10px;
     display: flex;
     flex-direction: column;
@@ -52,31 +53,29 @@
     border-bottom: 0.5px solid rgb(204, 200, 200);
 }
 .sign-in-email{
-    border: none;
+    display: flex;
     border-radius: 5px;
-    padding: 10px 15px;
-    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-    background-color: beige;
-    font-family:sans-serif;
+    width: 199px;
+    margin: 0 auto;
     margin-bottom: 5px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }
-.sign-in-password{
+.sign-in-email input{
+    background-color: beige;
     border: none;
     border-radius: 5px;
     padding: 10px 15px;
-    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-    background-color: beige;
-    font-family:sans-serif;
-    margin-bottom: 5px;
+    width: 100%;
 }
 .sign-in-email-container .sign-in-email-btn{
     padding: 0;
     width: 120px;
     display: inline-block;
     margin-bottom: 10px;
+    color: black;
 }
 .or{
-    margin-top: 15px;
+    margin-top: 1rem;
     width: 100%;
     border-bottom: 0.5px solid rgb(204, 200, 200);
 }
@@ -96,12 +95,10 @@
     width: 120px;
     display: inline-block;
     text-align: center;
+    color: black;
     
 }
 .alert-message{
     color: red;
     font-family:sans-serif; 
-}
-@media (max-width: 1120px){
-    
 }

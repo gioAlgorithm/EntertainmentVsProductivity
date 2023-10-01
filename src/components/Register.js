@@ -28,8 +28,12 @@ export default function Register({handleSignUpClose}) {
         <div className="register-container">
             <h1 className="register-title">Register</h1>
             <form onSubmit={handleSignUp}>
-                <input className="register-nickname" required placeholder="Nickname" type="text" id="displayName" value={displayName} onChange={(e) => setDisplayName(e.target.value)} />
-                <input className="register-email" required placeholder="Email" type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <div className="register-nickname">
+                  <input required placeholder="Nickname" type="text" id="displayName" value={displayName} onChange={(e) => setDisplayName(e.target.value)} />
+                </div>
+                <div className="register-email">
+                  <input required placeholder="Email" type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                </div>
                 <Password setPassword = {setPassword} password ={password} />
                 
                 <button className="sign-up-button" type="submit">Sign Up</button>

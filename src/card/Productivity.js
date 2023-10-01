@@ -320,7 +320,7 @@ export default function Productivity({setShowSignInWarning}){
                     <span className="p-timer-width"><h1 className="p-timer">{pseconds <10 ? "0" + pseconds : pseconds}</h1><span>s</span></span>     
                 </div>
                 <div className="p-buttons">
-                  <button className="p-restart" onClick={handleReset}>
+                  <button className="p-restart" style={{paddingLeft: '1.5rem'}} onClick={handleReset}>
                     Reset
                   </button>
                   {productivityStarted ? (
