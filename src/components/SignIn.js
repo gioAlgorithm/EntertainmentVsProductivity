@@ -53,8 +53,6 @@ const SignInWithEmail = () => {
   );
 };
 
-
-
 const SignIn = () => {
   //state to show up sign up container
   const [showSignUp, setShowSignUp] = useState(false);

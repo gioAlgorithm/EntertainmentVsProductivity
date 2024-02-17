@@ -12,18 +12,18 @@ export default function Register({handleSignUpClose}) {
     const [message, setMessage] = useState("");
 
     const handleSignUp = async (e) => {
-        e.preventDefault();
-        try {
-          const { user } = await createUserWithEmailAndPassword(auth, email, password);
-          await updateProfile(user, { displayName });
-          console.log(user);
-        } catch (error) {
-          console.log(error);
-          if (error.code === "auth/email-already-in-use") {
-            setMessage("User already exists");
-          }
+      e.preventDefault();
+      try {
+        const { user } = await createUserWithEmailAndPassword(auth, email, password);
+        await updateProfile(user, { displayName });
+        console.log(user);
+      } catch (error) {
+        console.log(error);
+        if (error.code === "auth/email-already-in-use") {
+          setMessage("User already exists");
         }
-      };
+      }
+    };
     return(
         <div className="register-container">
             <h1 className="register-title">Register</h1>
